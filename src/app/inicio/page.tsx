@@ -4,6 +4,7 @@ import Hero from "@/modules/start/components/Hero";
 import Principes from "@/modules/start/components/Principes";
 import Areas from "@/modules/start/components/Areas";
 import Footer from "@/components/Footer";
+import Gallery from "@/modules/gallery-maps/gallery"
 import { Stack } from "@mui/material";
 
 export default function Inicio() {
@@ -11,7 +12,7 @@ export default function Inicio() {
   return (
     <>
       <Hero />
-      <Principes />
+      <Gallery />
       <Areas />
       <Footer />
     </>

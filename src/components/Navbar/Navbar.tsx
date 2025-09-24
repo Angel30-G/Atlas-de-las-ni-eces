@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTheme } from "@/theme/ThemeProvider";
 import ColorSelector from "../ColorSelector/ColorSelector";
 import Link from "next/link";
+import Image from "next/image";
 import {
   AppBar,
   Box,
@@ -39,7 +40,7 @@ export default function Navbar() {
         position="static"
         elevation={0}
         sx={{
-          bgcolor: "white",
+          bgcolor: "rgba(219, 214, 187, 0.65)",
           color: theme.text1,
           boxShadow: "none",
           px: 2,
@@ -48,26 +49,25 @@ export default function Navbar() {
         <Toolbar sx={{ justifyContent: "space-between", padding: 0 }}>
           <Box
             sx={{
-              backgroundColor: theme.primary,
-              py: 1,
-              px: 2,
-              borderRadius: "1.5rem",
-            }}
+              
+            }} 
           >
-            <Typography
-              sx={{
-                fontSize: {
-                  xs: "1rem",
-                  md: "1.25rem",
-                },
-                fontWeight: {
-                  xs: "500",
-                  md: "bold",
-                },
-              }}
-            >
-              Niñeces Mapeando
-            </Typography>
+
+            <Box sx={{
+              position: "relative",
+              width: { xs: 110, md: 120 },
+              height: { xs: 110, md: 120 },
+              marginRight: 2,
+            }}>
+              <Image
+                src="/logo.png"
+                alt="Logo Atlas de las niñeces"
+                fill
+                style={{ objectFit: "contain" }}
+                priority
+              />
+            </Box>
+
           </Box>
 
           {isSmall ? (

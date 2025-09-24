@@ -16,8 +16,8 @@ export type Theme = {
 export const themes: Record<string, Theme> = {
   fire: {
     name: "fire",
-    primary: "#BF5D67",
-    secondary: "#F26D6D",
+    primary: "#f16f33",
+    secondary: "#387bbf",
     background: "#FFF2F2",
     surface: "#FFE5E5",
     text1: "#FFFFFF",
@@ -30,8 +30,8 @@ export const themes: Record<string, Theme> = {
 
   ocean: {
     name: "ocean",
-    primary: "#68AFC7",
-    secondary: "#4EC1B7",
+    primary: "#387bbf",
+    secondary: "#a4c42d",
     background: "#F0FCFD",
     surface: "#DFF6F9",
     text1: "#FFFFFF",
@@ -44,8 +44,8 @@ export const themes: Record<string, Theme> = {
 
   jungle: {
     name: "jungle",
-    primary: "#5DBF9F",
-    secondary: "#49D19C",
+    primary: "#a4c42d",
+    secondary: "#f16f33",
     background: "#F2FCF9",
     surface: "#E1F9EE",
     text1: "#FFFFFF",
