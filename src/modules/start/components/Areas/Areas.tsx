@@ -1,10 +1,57 @@
-import { Typography, Stack, Box } from "@mui/material";
+import { Typography, Stack, Box, TextField, MenuItem, Chip } from "@mui/material";
 import { useTheme } from "@/theme/ThemeProvider";
 import CardWithImage from "@/components/CardWithImage";
 import Image from "next/image";
+import { useState, useMemo, ChangeEvent } from "react";
+
+// Importaciones desde los archivos separados
+import { School } from "@/modules/start/components/Areas/Filtro/Filtros";
+import { schoolData } from "@/modules/start/components/Areas/Data/SchoolData";
+import { provinces, cantonesByProvince } from "@/modules/start/components/Areas/Data/ProvinceData";
 
 export default function Areas() {
   const { theme, isSmall } = useTheme();
+  const [selectedProvince, setSelectedProvince] = useState<string>("");
+  const [selectedCanton, setSelectedCanton] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  // Filtrar escuelas basado en los filtros
+  const filteredSchools = useMemo(() => {
+    return schoolData.filter(school => {
+      const matchesProvince = !selectedProvince || school.province === selectedProvince;
+      const matchesCanton = !selectedCanton || school.canton === selectedCanton;
+      const matchesSearch = !searchTerm ||
+        school.schoolName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        school.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        school.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+      return matchesProvince && matchesCanton && matchesSearch;
+    });
+  }, [selectedProvince, selectedCanton, searchTerm]);
+
+  // Resetear cantón cuando cambia la provincia
+  const handleProvinceChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelectedProvince(event.target.value);
+    setSelectedCanton("");
+  };
+
+  const handleCantonChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelectedCanton(event.target.value);
+  };
+
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Limpiar todos los filtros
+  const clearFilters = () => {
+    setSelectedProvince("");
+    setSelectedCanton("");
+    setSearchTerm("");
+  };
+
+  // Cantones disponibles basados en la provincia seleccionada
+  const availableCantones = selectedProvince ? cantonesByProvince[selectedProvince] || [] : [];
 
   return (
     <Stack bgcolor={theme.primary} pt={4} alignItems="center">
@@ -25,6 +72,7 @@ export default function Areas() {
           maxWidth: "1200px",
         }}
       >
+        {/* ... (el resto del código JSX permanece igual) */}
         <Box
           sx={{
             position: "relative",
@@ -127,37 +175,184 @@ export default function Areas() {
           />
         </Box>
 
-        {/* Cards */}
+        {/* Filtros */}
         <Stack
+          spacing={3}
+          width="100%"
+          maxWidth="800px"
+          mt={6}
           alignItems="center"
-          justifyContent="space-between"
-          gap={5}
+        >
+          <Typography variant="h5" color={theme.primary} fontWeight="bold">
+            Filtros de Búsqueda
+          </Typography>
+
+          {/* Buscador */}
+          <TextField
+            fullWidth
+            label="Buscar escuela o zona"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            sx={{
+              maxWidth: "500px",
+              '& .MuiOutlinedInput-root': {
+                borderRadius: 3,
+              }
+            }}
+          />
+
+          {/* Filtros de provincia y cantón */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            width="100%"
+            justifyContent="center"
+            alignItems={{ xs: "center", sm: "flex-start" }}
+          >
+            <TextField
+              select
+              label="Provincia"
+              value={selectedProvince}
+              onChange={handleProvinceChange}
+              sx={{
+                minWidth: 200,
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: 3,
+                }
+              }}
+            >
+              <MenuItem value="">
+                <em>Todas las provincias</em>
+              </MenuItem>
+              {provinces.map((province) => (
+                <MenuItem key={province} value={province}>
+                  {province}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            <TextField
+              select
+              label="Cantón"
+              value={selectedCanton}
+              onChange={handleCantonChange}
+              disabled={!selectedProvince}
+              sx={{
+                minWidth: 200,
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: 3,
+                }
+              }}
+            >
+              <MenuItem value="">
+                <em>Todos los cantones</em>
+              </MenuItem>
+              {availableCantones.map((canton: string) => (
+                <MenuItem key={canton} value={canton}>
+                  {canton}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Stack>
+
+          {/* Chips de filtros activos */}
+          {(selectedProvince || selectedCanton || searchTerm) && (
+            <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" justifyContent="center">
+              <Typography variant="body2" color={theme.text2}>
+                Filtros activos:
+              </Typography>
+              {selectedProvince && (
+                <Chip
+                  label={`Provincia: ${selectedProvince}`}
+                  onDelete={() => setSelectedProvince("")}
+                  color="primary"
+                  size="small"
+                />
+              )}
+              {selectedCanton && (
+                <Chip
+                  label={`Cantón: ${selectedCanton}`}
+                  onDelete={() => setSelectedCanton("")}
+                  color="secondary"
+                  size="small"
+                />
+              )}
+              {searchTerm && (
+                <Chip
+                  label={`Búsqueda: ${searchTerm}`}
+                  onDelete={() => setSearchTerm("")}
+                  variant="outlined"
+                  size="small"
+                />
+              )}
+              <Chip
+                label="Limpiar todo"
+                onClick={clearFilters}
+                variant="outlined"
+                color="error"
+                size="small"
+                clickable
+              />
+            </Stack>
+          )}
+
+          {/* Contador de resultados */}
+          <Typography variant="body1" color={theme.text2}>
+            {filteredSchools.length} {filteredSchools.length === 1 ? 'resultado' : 'resultados'} encontrados
+          </Typography>
+        </Stack>
+
+        {/* Cards filtradas - MODIFICADO: Stack horizontal con wrap */}
+        <Stack
+          direction="row"
+          spacing={4}
+          justifyContent="center"
+          alignItems="flex-start"
+          flexWrap="wrap"
           mb={6}
-          mt={10}
+          mt={6}
           borderRadius={6}
           sx={{
-            flexDirection: { sm: "column", md: "row" },
-            width: {
-              xs: "100%",
-              sm: "70%",
-              md: "90%",
-            },
+            width: "100%",
+            maxWidth: "1200px",
+            gap: 3,
           }}
         >
-          <CardWithImage
-            title="Zona Liberia"
-            subheader="1 de junio 2023"
-            image="/assets/images/zones/liberia_2023.jpg"
-            description="Escuela Escuela Alba Ocampo Alvarado - Liberia"
-            href="/lugares/liberia"
-          />
-          <CardWithImage
-            title="Zona Alajuela"
-            subheader="Actualizado el 2 de junio"
-            image="/assets/images/zones/alajuela_2023.jpg"
-            description="Escuela Ascención Esquivel - Alajuela"
-            href="/lugares/alajuela"
-          />
+          {filteredSchools.length > 0 ? (
+            filteredSchools.map((school) => (
+              <Box
+                key={school.id}
+                sx={{
+                  width: {
+                    xs: "100%",        // En móvil: una columna
+                    sm: "48%",         // En tablet: 2 columnas  
+                    md: "45%",         // En desktop: 2 columnas
+                    lg: "45%",         // En pantallas grandes: 3 columnas
+                  },
+                  maxWidth: "500px",
+                  minWidth: "300px",   // Ancho mínimo para mantener buena legibilidad
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: 4,
+                  }
+                }}
+              >
+                <CardWithImage
+                  title={school.title}
+                  subheader={school.subheader}
+                  image={school.image}
+                  description={school.description}
+                  href={school.href}
+                />
+              </Box>
+            ))
+          ) : (
+            <Typography variant="h6" color={theme.text2} textAlign="center" mt={4}>
+              No se encontraron resultados para los filtros seleccionados
+            </Typography>
+          )}
         </Stack>
 
         {/* Brújula decorativa */}

@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/theme/ThemeProvider";
 
 const baseImages = [
-  "/assets/heroImages/Hero1.jpg",
-  "/assets/heroImages/Hero2.jpg",
-  "/assets/heroImages/Hero3.jpg",
+  "/assets/heroImages/Hero8.jpg",
+  "/assets/heroImages/Hero9.jpg",
+  "/assets/heroImages/Hero10.jpg",
   "/assets/heroImages/Hero4.jpg",
   "/assets/heroImages/Hero5.jpg",
   "/assets/heroImages/Hero6.jpg",

@@ -17,13 +17,34 @@ import {
   ListItemText,
   useMediaQuery,
   Divider,
+  keyframes,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
+// Animación de flotación
+const floatAnimation = keyframes`
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+  100% { transform: translateY(0px); }
+`;
+
+// Animación de pulso suave
+const pulseAnimation = keyframes`
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+`;
+
+// Animación de rotación continua muy lenta
+const rotateAnimation = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
+
 export default function Navbar() {
   const { theme, isSmall } = useTheme();
-
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const navItems = [
     { label: "Inicio", href: "/inicio" },
@@ -47,27 +68,39 @@ export default function Navbar() {
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between", padding: 0 }}>
-          <Box
-            sx={{
-              
-            }} 
-          >
-
-            <Box sx={{
-              position: "relative",
-              width: { xs: 110, md: 120 },
-              height: { xs: 110, md: 120 },
-              marginRight: 2,
-            }}>
+          <Box>
+            <Box 
+              sx={{
+                position: "relative",
+                width: { xs: 110, md: 120 },
+                height: { xs: 110, md: 120 },
+                marginRight: 2,
+                cursor: "pointer",
+                // Animación de flotación continua
+                animation: `${floatAnimation} 3s ease-in-out infinite`,
+                // Efecto al hover
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  animation: `${pulseAnimation} 0.6s ease-in-out`,
+                  transform: "scale(1.1)",
+                }
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
               <Image
                 src="/logo.png"
                 alt="Logo Atlas de las niñeces"
                 fill
-                style={{ objectFit: "contain" }}
+                style={{ 
+                  objectFit: "contain",
+                  // Efecto de brillo al hover
+                  filter: isHovered ? "brightness(1.2) drop-shadow(0 0 8px rgba(0,0,0,0.3))" : "none",
+                  transition: "filter 0.3s ease"
+                }}
                 priority
               />
             </Box>
-
           </Box>
 
           {isSmall ? (

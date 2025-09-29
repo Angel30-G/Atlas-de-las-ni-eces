@@ -99,9 +99,9 @@ export default function CardWithImage({
         >
           <Button onClick={toggleLike}>
             {liked ? (
-              <FavoriteIcon sx={{ color: "#e53950" }} />
+              <FavoriteIcon sx={{ color: theme.primary }} />
             ) : (
-              <FavoriteBorderIcon sx={{ color: "#e53950" }} />
+              <FavoriteBorderIcon sx={{ color: theme.primary }} />
             )}
           </Button>
         </Box>
@@ -138,7 +138,7 @@ export default function CardWithImage({
               fullWidth
               startIcon={<SearchIcon />}
               sx={{
-                backgroundColor: theme.primary,
+                backgroundColor: theme.secondary,
                 fontWeight: 600,
                 fontSize: "0.9rem",
                 borderRadius: 2,
@@ -146,7 +146,7 @@ export default function CardWithImage({
                 py: 1,
                 minHeight: "40px",
                 "&:hover": {
-                  backgroundColor: theme.secondary,
+                  backgroundColor: theme.primary,
                 },
               }}
             >

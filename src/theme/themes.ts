@@ -24,7 +24,7 @@ export const themes: Record<string, Theme> = {
     text2: "#5C1A1A",
     success: "#FFB2B2",
     warning: "#FFDA80",
-    error: "#A83232",
+    error: "#f16f33",
     info: "#FFD1D1",
   },
 
