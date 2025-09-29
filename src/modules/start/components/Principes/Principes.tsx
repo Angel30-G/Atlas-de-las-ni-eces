@@ -10,7 +10,7 @@ export default function Principes() {
     <Stack
       justifyContent="center"
       sx={{
-        backgroundColor: theme.primary,
+        backgroundColor: theme.background,
         width: "100%",
         minHeight: 320,
         py: { sm: 8, md: 12 },
