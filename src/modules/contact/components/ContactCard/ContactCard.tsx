@@ -1,19 +1,20 @@
 "use client";
 
-import { Stack, Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import ContactInput from "../ContactInput";
-import { useTheme } from "@/theme/ThemeProvider";
-import Image from "next/image";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useTheme } from "@/theme/ThemeProvider"; 
 
 export default function ContactCard() {
-  const { theme, isSmall } = useTheme();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { theme, isSmall } = useTheme(); 
 
   const onSubmit = async (data: any) => {
     const response = await fetch("/api/send-email", {
@@ -33,110 +34,104 @@ export default function ContactCard() {
     <Box
       width="100%"
       minHeight="84vh"
-      bgcolor={theme.surface}
+      bgcolor={theme.background} 
+      px={{ xs: 3, md: 10 }}
+      py={{ xs: 6, md: 10 }}
       display="flex"
-      justifyContent="center"
-      alignItems="center"
-      px={2}
-      py={8}
+      flexDirection="column"
     >
-      <Box
-        width="100%"
-        maxWidth={700}
-        bgcolor={"white"}
-        borderRadius={4}
-        p={{ xs: 4, md: 6 }}
-        display="flex"
-        flexDirection="column"
-        gap={4}
-        position="relative"
+      {/* Título */}
+      <Typography 
+        variant="h4" 
+        fontWeight="bold" 
+        color={theme.primary} 
+        mb={2}
       >
-        <Image
-          src="/assets/vectors/mail.svg"
-          alt="mail"
-          width={isSmall ? 70 : 100}
-          height={isSmall ? 70 : 100}
-          style={{
-            position: "absolute",
-            top: -20,
-            right: -20,
-            transform: "rotate(21deg)",
+        CONTÁCTANOS
+      </Typography>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {/* grid container */}
+        <Box
+          component="div"
+          sx={{
+            display: "grid",
+            gap: 3,
+            // 1 columna en mobile, 2 columnas en md+
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
           }}
-        />
-
-        <Typography
-          variant="h4"
-          fontWeight="bold"
-          textAlign="center"
-          color={theme.text2}
         >
-          Contáctanos
-        </Typography>
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={3}>
+          {/* Nombre */}
+          <Box>
             <ContactInput
               type="text"
-              label="Nombre"
+              label="NOMBRE"
               name="nombre"
               register={register}
               error={errors.nombre}
             />
-            <ContactInput
-              type="email"
-              label="Correo electrónico"
-              name="correo"
-              register={register}
-              error={errors.correo}
-            />
+          </Box>
+
+          {/* Teléfono */}
+          <Box>
             <ContactInput
               type="text"
-              label="Número de teléfono"
+              label="NÚMERO DE TELÉFONO"
               name="telefono"
               register={register}
               error={errors.telefono}
             />
+          </Box>
+
+          {/* Correo */}
+          <Box>
+            <ContactInput
+              type="email"
+              label="CORREO ELECTRÓNICO"
+              name="correo"
+              register={register}
+              error={errors.correo}
+            />
+          </Box>
+
+          {/* Mensaje: ocupa las 2 columnas en md+ */}
+          <Box sx={{ gridColumn: { md: "1 / 3" } }}>
             <ContactInput
               type="area"
-              label="Mensaje"
+              label="MENSAJE"
               name="mensaje"
               register={register}
               error={errors.mensaje}
             />
+          </Box>
+        </Box>
 
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{
-                bgcolor: theme.primary,
-                color: theme.text1,
-                fontWeight: "bold",
-                py: 1.5,
-                borderRadius: "6px",
-                textTransform: "none",
-                boxShadow: "none",
-                "&:hover": {
-                  bgcolor: theme.secondary,
-                },
-              }}
-            >
-              Enviar mensaje
-            </Button>
-          </Stack>
-        </form>
-      </Box>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+        {/* Botón enviar */}
+        <Box mt={4} textAlign="right">
+          <Button
+            type="submit"
+            variant="text"
+            sx={{
+              color: theme.secondary, 
+              fontWeight: "bold",
+              textTransform: "uppercase",
+              fontSize: "1rem",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 1,
+              "&:hover": { 
+                color: theme.primary, 
+                backgroundColor: "transparent" 
+              },
+            }}
+          >
+            enviar →
+          </Button>
+        </Box>
+      </form>
+
+      {/* Toast */}
+      <ToastContainer position="bottom-right" autoClose={4000} />
     </Box>
   );
 }

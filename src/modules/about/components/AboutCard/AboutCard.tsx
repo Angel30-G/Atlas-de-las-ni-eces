@@ -72,7 +72,7 @@ export default function AboutUs() {
         bgcolor={theme.surface}
         spacing={4}
         position="relative"
-        mb={8}
+        mb={3}
         mt={10}
       >
         {/* Texto a la izquierda */}
@@ -153,14 +153,6 @@ export default function AboutUs() {
 
       </Stack>
 
-      {/* Sección Brochure */}
-      <Box
-        width="100%"
-        maxWidth="1200px"
-        textAlign="center"
-        p={4}
-      >  
-      </Box>
     </Box>
   );
 }
