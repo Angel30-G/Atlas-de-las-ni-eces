@@ -299,6 +299,19 @@ export default function AnimatedGallery() {
                 </Box>
               </Box>
             </Card>
+
+            {/* Bicho lupa - NUEVA IMAGEN AGREGADA */}
+                    <Image
+                      src="/substract.png"
+                      alt="Bicho lupa"
+                      width={50}
+                      height={40}
+                      style={{
+                        position: "absolute",
+                        bottom: -10,
+                        right: -10,
+                      }}
+                    />
           </Box>
         ))}
       </Stack>

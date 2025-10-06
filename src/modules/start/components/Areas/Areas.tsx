@@ -368,6 +368,19 @@ export default function Areas() {
             transform: "rotate(30deg)",
           }}
         />
+
+        {/* Bicho lupa - NUEVA IMAGEN AGREGADA */}
+        <Image
+          src="/bicho-lupa.png"
+          alt="Bicho lupa"
+          width={120}
+          height={120}
+          style={{
+            position: "absolute",
+            bottom: -40,
+            left: -60,
+          }}
+        />
       </Stack>
     </Stack>
   );
