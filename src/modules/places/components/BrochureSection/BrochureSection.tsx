@@ -52,6 +52,7 @@ export default function BrochureSection({
         fontWeight="bold"
         color={theme.primary}
         textAlign={"center"}
+        fontFamily={"'Josefin Sans', sans-serif"}
       >
         Obtén más información en nuestro brochure
       </Typography>
@@ -106,6 +107,7 @@ export default function BrochureSection({
               color: theme.primary,
               fontWeight: "bold",
               textTransform: "none",
+              fontFamily: "'Josefin Sans', sans-serif",
               px: 4,
               py: 1.5,
               borderRadius: 2,
@@ -134,6 +136,7 @@ export default function BrochureSection({
                 color: "white",
                 fontWeight: "bold",
                 textTransform: "none",
+                fontFamily: "'Josefin Sans', sans-serif",
                 px: 4,
                 py: 1.5,
                 borderRadius: 2,
@@ -160,6 +163,7 @@ export default function BrochureSection({
         sx={{
           maxWidth: "600px",
           fontStyle: "italic",
+          fontFamily: "'Josefin Sans', sans-serif",
           mt: 2,
         }}
       >

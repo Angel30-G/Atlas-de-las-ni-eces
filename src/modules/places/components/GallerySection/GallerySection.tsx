@@ -105,6 +105,7 @@ export default function GallerySection({ images, text }: VideoSectionProps) {
           backgroundClip: "text",
           WebkitBackgroundClip: "text",
           color: "transparent",
+          fontFamily: "'Josefin Sans', sans-serif",
           mb: 2,
           "&::before": {
             content: '"📸"',
@@ -149,6 +150,7 @@ export default function GallerySection({ images, text }: VideoSectionProps) {
           background: `linear-gradient(135deg, ${theme.background}dd, ${theme.primary}15)`,
           border: `2px dotted ${theme.primary}60`,
           position: "relative",
+          fontFamily: "'Josefin Sans', sans-serif",
           boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
           "&::before": {
             content: '"🎨"',
@@ -197,7 +199,7 @@ export default function GallerySection({ images, text }: VideoSectionProps) {
         <Box sx={{ animation: "bounce 1s infinite" }}>
           🎯
         </Box>
-        <Typography variant="body1" fontWeight="bold">
+        <Typography variant="body1" fontWeight="bold" fontFamily={"'Josefin Sans', sans-serif"}>
           Imagen {currentIndex + 1} de {images.length}
         </Typography>
         <Box sx={{ animation: "bounce 1s infinite 0.3s" }}>
@@ -348,6 +350,7 @@ export default function GallerySection({ images, text }: VideoSectionProps) {
           fontStyle: "italic",
           padding: 2,
           borderRadius: 2,
+          fontFamily: "'Josefin Sans', sans-serif",
           background: theme.background,
           animation: "fadeInOut 3s infinite",
           "@keyframes fadeInOut": {

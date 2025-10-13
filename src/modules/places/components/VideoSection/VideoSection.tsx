@@ -43,6 +43,7 @@ export default function VideoSection({ videoLink, text }: videoSectionProps) {
         transform: isVisible ? "translateY(0)" : "translateY(50px)",
         opacity: isVisible ? 1 : 0,
         transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+        fontFamily: "'Josefin Sans', sans-serif",
       }}
     >
       {/* Elementos decorativos flotantes */}
@@ -95,6 +96,7 @@ export default function VideoSection({ videoLink, text }: videoSectionProps) {
           color: "transparent",
           position: "relative",
           display: "inline-block",
+          fontFamily: "'Josefin Sans', sans-serif",
           mb: 2,
           "&::before": {
             content: '"🎬"',
@@ -138,6 +140,7 @@ export default function VideoSection({ videoLink, text }: videoSectionProps) {
           borderRadius: 4,
           background: `linear-gradient(135deg, ${theme.background}dd, ${theme.primary}15)`,
           border: `2px dashed ${theme.primary}40`,
+          fontFamily: "'Josefin Sans', sans-serif",
           position: "relative",
           "&::before": {
             content: '"💡"',
@@ -276,7 +279,7 @@ export default function VideoSection({ videoLink, text }: videoSectionProps) {
         mt={3}
         sx={{
           color: theme.text2,
-          fontStyle: "italic",
+          fontFamily: "'Josefin Sans', sans-serif",
           animation: "fadeInOut 3s infinite",
           "@keyframes fadeInOut": {
             "0%, 100%": { opacity: 0.6 },
