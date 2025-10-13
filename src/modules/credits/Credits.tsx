@@ -101,6 +101,7 @@ export default function Credits() {
               justifyContent: "center",
               marginBottom: 4,
               fontWeight: "bold",
+              fontFamily: "'Josefin Sans', sans-serif",
             }}
           >
             Profesores
@@ -143,6 +144,7 @@ export default function Credits() {
               justifyContent: "center",
               fontWeight: "bold",
               textAlign: "center",
+              fontFamily: "'Josefin Sans', sans-serif",
               marginBottom: 4,
             }}
           >
@@ -168,6 +170,7 @@ export default function Credits() {
                   cursor: "pointer",
                   borderRadius: 2,
                   boxShadow: "none",
+                  fontFamily: "'Josefin Sans', sans-serif",
                   bgcolor: "white",
                   transform: `rotate(${getRandomRotation()})`,
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",

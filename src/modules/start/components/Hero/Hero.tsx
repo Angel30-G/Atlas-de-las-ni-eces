@@ -8,10 +8,10 @@ const baseImages = [
   "/assets/heroImages/Hero8.jpg",
   "/assets/heroImages/Hero9.jpg",
   "/assets/heroImages/Hero10.jpg",
-  "/assets/heroImages/Hero4.jpg",
-  "/assets/heroImages/Hero5.jpg",
+  "/assets/heroImages/Hero13.jpg",
+  "/assets/heroImages/Hero12.jpg",
   "/assets/heroImages/Hero6.jpg",
-  "/assets/heroImages/Hero7.jpg",
+  "/assets/heroImages/Hero11.jpg",
 ];
 
 const images = [...baseImages, baseImages[0]];
@@ -107,6 +107,7 @@ export default function Hero() {
             px: 4,
             py: 2,
             textAlign: "center",
+            fontFamily: "'Josefin Sans', sans-serif",
           }}
         >
           Atlas de las niñeces Costa Rica
@@ -119,6 +120,7 @@ export default function Hero() {
             py: 2,
             textAlign: "center",
             lineHeight: 1.5,
+            fontFamily: "'Josefin Sans', sans-serif",
             width: { xs: "90%", md: "80%" },
           }}
         >

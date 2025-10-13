@@ -107,6 +107,7 @@ export default function PlaceCard({ place, school }: placeCardProps) {
             WebkitBackgroundClip: "text",
             color: "transparent",
             fontWeight: "bold",
+            fontFamily: "'Josefin Sans', sans-serif",
             mb: 1,
             textShadow: "0 2px 4px rgba(0,0,0,0.1)",
           }}
@@ -144,6 +145,7 @@ export default function PlaceCard({ place, school }: placeCardProps) {
               sx={{
                 display: "flex",
                 alignItems: "center",
+                fontFamily: "'Josefin Sans', sans-serif",
                 gap: 1,
                 "&::before": {
                   content: '"🏫"',

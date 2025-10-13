@@ -21,6 +21,7 @@ export default function ImageCard({ title, description, image }: ImageCardProps)
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
+        fontFamily: "'Josefin Sans', sans-serif",
         gap: 2,
         px: { xs: 1, md: 2 },
       }}
@@ -28,6 +29,7 @@ export default function ImageCard({ title, description, image }: ImageCardProps)
       <Typography
         variant="h4"
         fontWeight="bold"
+        fontFamily={"'Josefin Sans', sans-serif"}
         color={theme.primary}
       >
         {title}
@@ -40,6 +42,7 @@ export default function ImageCard({ title, description, image }: ImageCardProps)
           aspectRatio: "3 / 4", 
           borderRadius: 3,
           overflow: "hidden",
+          fontFamily: "'Josefin Sans', sans-serif",
           boxShadow: 3,
         }}
       >

@@ -20,6 +20,7 @@ export default function ProfesorCard({ profesor }: ProfesorCardProps) {
         borderRadius: 3,
         boxShadow: "none",
         overflow: "hidden",
+        fontFamily: "'Josefin Sans', sans-serif",
         transition: "transform 0.3s ease",
         "&:hover": {
           transform: "translateY(-10px)",
@@ -58,6 +59,7 @@ export default function ProfesorCard({ profesor }: ProfesorCardProps) {
           sx={{
             fontWeight: "bold",
             color: "#555",
+            fontFamily: "'Josefin Sans', sans-serif",
             mb: 1,
           }}
         >
@@ -70,6 +72,7 @@ export default function ProfesorCard({ profesor }: ProfesorCardProps) {
             mt: 1,
             borderTop: `2px solid ${theme.primary}`,
             pt: 2,
+            fontFamily: "'Josefin Sans', sans-serif",
           }}
         >
           {profesor.unidad}

@@ -148,6 +148,7 @@ export default function Areas() {
               bottom: -40,
               left: "50%",
               transform: "translateX(-50%)",
+              fontFamily: "'Josefin Sans', sans-serif",
             }}
           >
             Lugares Mapeados
@@ -155,7 +156,7 @@ export default function Areas() {
         </Box>
 
         <Box mt={10} width={"90%"} justifyItems={"center"}>
-          <Typography variant={isSmall ? "body1" : "h6"} textAlign={"center"}>
+          <Typography variant={isSmall ? "body1" : "h6"} textAlign={"center"} fontFamily={"'Josefin Sans', sans-serif"}>
             El resultado es este Atlas digital, que muestra una colección de
             mapas construidos por las infancias, en los que se señalan los
             lugares que consideran relevantes en su día a día. Estos espacios
@@ -183,7 +184,7 @@ export default function Areas() {
           mt={6}
           alignItems="center"
         >
-          <Typography variant="h5" color={theme.primary} fontWeight="bold">
+          <Typography variant="h5" color={theme.primary} fontWeight="bold" fontFamily={"'Josefin Sans', sans-serif"}>
             Filtros de Búsqueda
           </Typography>
 
@@ -258,7 +259,7 @@ export default function Areas() {
 
           {/* Chips de filtros activos */}
           {(selectedProvince || selectedCanton || searchTerm) && (
-            <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" justifyContent="center">
+            <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" justifyContent="center" fontFamily={"'Josefin Sans', sans-serif"}>
               <Typography variant="body2" color={theme.text2}>
                 Filtros activos:
               </Typography>
@@ -298,7 +299,7 @@ export default function Areas() {
           )}
 
           {/* Contador de resultados */}
-          <Typography variant="body1" color={theme.text2}>
+          <Typography variant="body1" color={theme.text2} fontFamily={"'Josefin Sans', sans-serif"}>
             {filteredSchools.length} {filteredSchools.length === 1 ? 'resultado' : 'resultados'} encontrados
           </Typography>
         </Stack>
@@ -331,7 +332,8 @@ export default function Areas() {
                     lg: "45%",         // En pantallas grandes: 3 columnas
                   },
                   maxWidth: "500px",
-                  minWidth: "300px",   // Ancho mínimo para mantener buena legibilidad
+                  minWidth: "300px", // Ancho mínimo para mantener buena legibilidad
+                  fontFamily: "'Josefin Sans', sans-serif",  
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   '&:hover': {
                     transform: 'translateY(-5px)',
@@ -349,7 +351,7 @@ export default function Areas() {
               </Box>
             ))
           ) : (
-            <Typography variant="h6" color={theme.text2} textAlign="center" mt={4}>
+            <Typography variant="h6" color={theme.text2} textAlign="center" mt={4} fontFamily={"'Josefin Sans', sans-serif"}>
               No se encontraron resultados para los filtros seleccionados
             </Typography>
           )}

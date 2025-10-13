@@ -64,6 +64,7 @@ export default function Navbar() {
           bgcolor: "rgba(219, 214, 187, 0.65)",
           color: theme.text1,
           boxShadow: "none",
+          fontFamily: "'Josefin Sans', sans-serif",
           px: 2,
         }}
       >
@@ -123,6 +124,7 @@ export default function Navbar() {
                         borderColor: theme.primary,
                         borderTopLeftRadius: "1rem",
                         borderTopRightRadius: "1rem",
+                        fontFamily: "'Josefin Sans', sans-serif",
                         color: theme.text2,
                         transition: "all 0.3s",
                         "&:hover": {
