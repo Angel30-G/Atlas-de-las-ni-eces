@@ -33,17 +33,17 @@ export default function Principes() {
           <ImageCard
             title="Actividades"
             description="A través de talleres participativos realizados en escuelas públicas de distintas localidades del país, facilitados por población estudiantil del TEC junto a personas extensionistas y docentes."
-            image="/assets/heroImages/Hero4.jpg"
+            image="/assets/heroImages/nosotros1.jpg"
           />
           <ImageCard
             title="Logros"
             description="Se recopilan mapas, dibujos y narrativas creadas por niños y niñas entre los 9 y 10 años, que reflejan sus vivencias, preocupaciones, deseos y vínculos con el espacio público."
-            image="/assets/heroImages/Hero5.jpg"
+            image="/assets/heroImages/nosotros2.jpg"
           />
           <ImageCard
             title="Metodología"
             description="La metodología utilizada se basa en el mapeo participativo o cartografía social, una herramienta crítica que permite a las comunidades representar colectivamente su experiencia territorial. "
-            image="/assets/heroImages/Hero10.jpg"
+            image="/assets/heroImages/nosotros3.jpg"
          />
         </Stack>
       </Stack>

@@ -10,7 +10,7 @@ const baseImages = [
   "/assets/heroImages/Hero10.jpg",
   "/assets/heroImages/Hero13.jpg",
   "/assets/heroImages/Hero12.jpg",
-  "/assets/heroImages/Hero6.jpg",
+  "/assets/heroImages/Hero14.jpg",
   "/assets/heroImages/Hero11.jpg",
 ];
 
