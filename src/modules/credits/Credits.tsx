@@ -1,201 +1,249 @@
 "use client";
-import Footer from "@/components/Footer";
+
+import Image from "next/image";
 import {
+  Box,
   Stack,
   Typography,
-  Box,
-  Card,
-  CardContent,
-  Divider,
+  IconButton,
+  Button,
 } from "@mui/material";
-import { Group } from "@mui/icons-material";
-import ProfesorCard from "@/components/ProfesorCard";
+
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { useTheme } from "@/theme/ThemeProvider";
 
-export default function Credits() {
-  const { theme, isSmall } = useTheme();
+type Person = { nombre: string };
 
-  const profesores = [
-    {
-      nombre: "Dr. Jaime Gutiérrez Alfaro",
-      unidad:
-        "Unidad Desconcentrada Ingeniería en Computación, Centro Académico de Alajuela, ITCR",
-      avatar: "/images/profesores/jaime.jpg",
-    },
-    {
-      nombre: "Licda. Claudia Rojas Bravo",
-      unidad: "LabComun, ITCR",
-      avatar: "/images/profesores/claudia.jpg",
-    },
-    {
-      nombre: "Dra. Rosa Elena Malavassi Aguilar",
-      unidad: "Escuela de Arquitectura y Urbanismo, ITCR",
-      avatar: "/images/profesores/rosa.jpg",
-    },
-    {
-      nombre: "Arq. Dominique Chang Albizurez",
-      unidad: "Escuela de Arquitectura y Urbanismo, ITCR",
-      avatar: "/images/profesores/dominique.jpg",
-    },
-    {
-      nombre: "MDU. Arq. Mauricio Guevara Murillo",
-      unidad: "Escuela de Arquitectura y Urbanismo, ITCR",
-      avatar: "/images/profesores/mauricio.jpg",
-    },
-    {
-      nombre: "Dr. Francisco Mojica Mendieta",
-      unidad: "Escuela de Ciencias Sociales, ITCR",
-      avatar: "/images/profesores/francisco.jpg",
-    },
-    {
-      nombre: "Arq. Pablo Acuña Quiel",
-      unidad:
-        "Unidad Desconcentrada Ingeniería en Computación, Centro Académico de Alajuela, ITCR",
-      avatar: "/images/profesores/pablo.jpg",
-    },
-  ];
+function PersonTile({ nombre }: { nombre: string }) {
+  return (
+    <Stack alignItems="center" gap={1.5} sx={{ width: 160 }}>
+      <Box
+        sx={{
+          width: 100,
+          height: 100,
+          borderRadius: "50%",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <Image
+          src="/Avatar.png"
+          alt={nombre}
+          fill
+          sizes="100px"
+          style={{ objectFit: "cover" }}
+        />
+      </Box>
+      <Typography
+        variant="body2"
+        sx={{
+          fontWeight: 700,
+          textAlign: "center",
+          letterSpacing: 0.3,
+          textTransform: "uppercase",
+        }}
+      >
+        {nombre}
+      </Typography>
+    </Stack>
+  );
+}
 
-  const estudiantes = [
-    "Isaac Melendez Gatgens",
-    "Pablo Sandí Sanchez",
-    "Jeaustin Obando Arias",
-    "Fernando Vega Valerio",
-    "Royner Miranda Segura",
-    "Jesus Molina",
-    "Valeria Arias Umaña",
-    "Ervin Rodriquez Villanueva",
-    "Brandon Retana Chacon",
-    "Rosa Elena Malavassi Aguilar",
-    "Gerald Matarrita Alavarado",
-    "José Andrés Vargas Serrano",
-  ];
-
-  // Función para generar un ángulo de rotación aleatoria entre -2 y 2 grados
-  const getRandomRotation = () => `${(Math.random() * 4 - 2).toFixed(2)}deg`;
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  const { theme } = useTheme();
 
   return (
-    <>
-      <Stack width="100%" spacing={8} alignItems="center" mt={4} mb={4}>
-        <Box
-          bgcolor={theme.background}
-          py={4}
-          px={2}
-          borderRadius={4}
-          sx={{
-            width: {
-              xs: "95%",
-              sm: "90%",
-              md: "75%",
-            },
-          }}
-        >
-          <Typography
-            variant="h4"
-            component="h2"
-            gutterBottom
-            color={theme.text2}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              justifyContent: "center",
-              marginBottom: 4,
-              fontWeight: "bold",
-              fontFamily: "'Josefin Sans', sans-serif",
-            }}
-          >
-            Profesores
-          </Typography>
-          <Stack
-            flexDirection="row"
-            flexWrap="wrap"
-            gap={6}
-            justifyContent="center"
-            alignItems="center"
-          >
-            {profesores.map((profesor, index) => (
-              <ProfesorCard profesor={profesor} key={index} />
-            ))}
-          </Stack>
-        </Box>
+    <Box sx={{ width: { xs: "90%", md: "80%" } }}>
+      <Typography
+        component="h2"
+        sx={{
+          textAlign: "center",
+          fontWeight: 900,
+          letterSpacing: 1,
+          mb: 4,
+          fontSize: { xs: 20, md: 24 },
+          textTransform: "uppercase",
+          color: theme.primary,
+        }}
+      >
+        {title}
+      </Typography>
+      {children}
+    </Box>
+  );
+}
 
+export default function Credits() {
+  const { theme } = useTheme();
+
+  const profesores: Person[] = [
+    { nombre: "PROF. LOREM IPSUM" },
+    { nombre: "PROF. LOREM IPSUM" },
+    { nombre: "PROF. LOREM IPSUM" },
+    { nombre: "PROF. LOREM IPSUM" },
+  ];
+
+  const estudiantes: Person[] = [
+    { nombre: "LOREM IPSUM" },
+    { nombre: "LOREM IPSUM" },
+    { nombre: "LOREM IPSUM" },
+  ];
+
+  return (
+    <Stack
+      width="100%"
+      alignItems="center"
+      sx={{
+        bgcolor: "#FFF9F1",
+        py: { xs: 4, md: 8 },
+        gap: { xs: 6, md: 10 },
+      }}
+    >
+      {/* PROFESORES */}
+      <Section title="PROFESORES">
         <Box
           sx={{
-            width: {
-              xs: "95%",
-              sm: "90%",
-              md: "75%",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 5,
+            justifyContent: "center",
+            "& > *": {
+              flex: { xs: "0 0 calc(50% - 20px)", sm: "0 0 calc(25% - 20px)" },
+              maxWidth: { xs: "calc(50% - 20px)", sm: "calc(25% - 20px)" },
+              display: "flex",
+              justifyContent: "center",
             },
           }}
-          bgcolor={theme.background}
-          py={4}
-          px={2}
-          borderRadius={4}
         >
-          <Typography
-            variant="h4"
-            component="h2"
-            gutterBottom
-            color={theme.text2}
-            sx={{
+          {profesores.map((p, i) => (
+            <Box key={i}>
+              <PersonTile nombre={p.nombre} />
+            </Box>
+          ))}
+        </Box>
+      </Section>
+
+      {/* ESTUDIANTES */}
+      <Section title="ESTUDIANTES">
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 5,
+            justifyContent: "center",
+            "& > *": {
+              flex: { xs: "0 0 calc(50% - 20px)", sm: "0 0 calc(25% - 20px)" },
+              maxWidth: { xs: "calc(50% - 20px)", sm: "calc(25% - 20px)" },
               display: "flex",
-              alignItems: "center",
-              gap: 1,
               justifyContent: "center",
-              fontWeight: "bold",
-              textAlign: "center",
-              fontFamily: "'Josefin Sans', sans-serif",
-              marginBottom: 4,
+            },
+          }}
+        >
+          {estudiantes.map((e, i) => (
+            <Box key={i}>
+              <PersonTile nombre={e.nombre} />
+            </Box>
+          ))}
+        </Box>
+      </Section>
+
+      {/* NIÑOS Y NIÑAS PARTICIPANTES */}
+      <Section title="NIÑOS Y NIÑAS PARTICIPANTES">
+        <Stack alignItems="center" gap={3}>
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: 900,
+              position: "relative", // ancla del monito
+              mx: "auto",
             }}
           >
-            Estudiantes del TEC
-          </Typography>
-          <Stack
-            flexDirection="row"
-            flexWrap="wrap"
-            gap={4}
-            justifyContent="center"
-            alignItems="center"
-          >
-            {estudiantes.map((estudiante, index) => (
-              <Card
-                key={index}
-                sx={{
-                  width: 260,
-                  height: 70,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  px: 1,
-                  cursor: "pointer",
-                  borderRadius: 2,
-                  boxShadow: "none",
-                  fontFamily: "'Josefin Sans', sans-serif",
-                  bgcolor: "white",
-                  transform: `rotate(${getRandomRotation()})`,
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  "&:hover": {
-                    transform: "translateY(-5px) scale(1.02)",
-                    boxShadow: `0px 0px 20px ${theme.primary}`,
-                  },
-                }}
+            {/* Caja de la foto con overflow hidden (esquinas redondeadas) */}
+            <Box
+              sx={{
+                borderRadius: 4,
+                overflow: "hidden",               
+                boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+                position: "relative",
+                aspectRatio: "16/9",
+              }}
+            >
+              <Image
+                src="/ninos.png"
+                alt="Niños y niñas participantes"
+                fill
+                sizes="(max-width: 900px) 100vw, 900px"
+                style={{ objectFit: "cover" }}
+              />
+
+              {/* Flechas  */}
+              <IconButton
+                size="small"
+                sx={{ position: "absolute", left: 8, top: "calc(50% - 16px)", bgcolor: "white" }}
               >
-                <Typography
-                  variant="body1"
-                  textAlign="center"
-                  fontWeight="medium"
-                  color={theme.text2}
-                  sx={{
-                    transition: "color 0.3s ease",
-                  }}
-                >
-                  {estudiante}
-                </Typography>
-              </Card>
-            ))}
+                <ArrowBackIosNewIcon fontSize="small" />
+              </IconButton>
+              <IconButton
+                size="small"
+                sx={{ position: "absolute", right: 8, top: "calc(50% - 16px)", bgcolor: "white" }}
+              >
+                <ArrowForwardIosIcon fontSize="small" />
+              </IconButton>
+            </Box>
+
+            {/* Monito: hermano del cuadro de la foto, absoluto al WRAPPER */}
+            <Box
+              sx={{
+                position: "absolute",
+                right: { xs: -24, sm: -36, md: -48 }, 
+                bottom: { xs: -6, sm: -8, md: -10 },
+                width: { xs: 84, sm: 110, md: 140 },
+                pointerEvents: "none",
+                zIndex: 2,
+                filter: "drop-shadow(0 6px 10px rgba(0,0,0,.25))",
+              }}
+            >
+              <Image
+                src="/saludando.png"
+                alt="Personaje saludando"
+                width={200}
+                height={200}
+                style={{ width: "100%", height: "auto" }}
+                priority
+              />
+            </Box>
+          </Box>
+
+          {/* Dots */}
+          <Stack direction="row" alignItems="center" gap={2}>
+            <RadioButtonCheckedIcon fontSize="small" />
+            <RadioButtonUncheckedIcon fontSize="small" />
+            <RadioButtonUncheckedIcon fontSize="small" />
           </Stack>
-        </Box>
-      </Stack>
-    </>
+
+          {/* Botón explorar */}
+          <Stack direction="row" gap={4}>
+            <Button
+              startIcon={<PlayCircleOutlineIcon />}
+              variant="text"
+              sx={{ textTransform: "none", fontWeight: 700 }}
+            >
+              explorar
+            </Button>
+
+          </Stack>
+        </Stack>
+      </Section>
+    </Stack>
   );
 }
