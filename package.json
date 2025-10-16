@@ -17,7 +17,8 @@
     "framer-motion": "^12.15.0",
     "lucide-react": "^0.511.0",
     "next": "^15.1.8",
-    "nodemailer": "^7.0.3",
+    "nodemailer": "^7.0.9",
+    "pg": "^8.16.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.57.0",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^20.19.17",
     "@types/nodemailer": "^6.4.17",
+    "@types/pg": "^8.15.5",
     "@types/react": "^19.1.15",
     "@types/react-dom": "^19.1.9",
     "@types/react-image-gallery": "^1.2.4",
