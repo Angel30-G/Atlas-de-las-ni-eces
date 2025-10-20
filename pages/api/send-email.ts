@@ -66,7 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       [nombre, telefono, correo, mensaje]
     );
 
-    //Enviar el correo sin exponer tu dirección real
+    //Enviar el correo
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
