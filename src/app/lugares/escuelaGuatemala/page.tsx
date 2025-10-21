@@ -39,7 +39,7 @@ export default function Guatemala() {
         mt={8}
       >
         <VideoSection
-          videoLink=""
+          videoLink="https://www.youtube.com/embed/CnHtFwKbPzQ?si=trdzmczsFMnJwz-0"
           text="Profesores y estudiantes del Tecnológico de Costa Rica (TEC) visitamos la Escuela republica de Guatemala, en busca de especialistas para apoyarnos en un proyecto muy importante sobre la ciudad. Por suerte, nos encontramos con niñas y niños, quienes nos contaron sus pensares y sentires sobre el lugar donde viven. Por medio de mapas nos indicaron los lugares que más les gustan, los que consideran seguros, donde juegan y en general, los que hacen parte de su cotidiano de alguna manera."
         />
         <GallerySection

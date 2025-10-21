@@ -22,9 +22,9 @@ export const themes: Record<string, Theme> = {
     surface: "#FFE5E5",
     text1: "#FFFFFF",
     text2: "#5C1A1A",
-    success: "#FFB2B2",
+    success: "#5C1A1A",
     warning: "#FFDA80",
-    error: "#f16f33",
+    error: "#A83232",
     info: "#FFD1D1",
   },
 

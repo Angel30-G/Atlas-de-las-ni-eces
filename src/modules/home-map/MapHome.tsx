@@ -5,12 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 
-type MapSectionProps = {
+type MapHomeProps = {
   mapLink: string;
   text: string;
 };
 
-export default function MapSection({ mapLink, text }: MapSectionProps) {
+export default function MapSection({ mapLink, text }: MapHomeProps) {
   const { theme, isSmall } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);

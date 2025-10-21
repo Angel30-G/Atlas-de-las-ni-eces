@@ -47,7 +47,7 @@ export default function ContactInput({
         variant="outlined"
         sx={{
           "& .MuiOutlinedInput-root": {
-            bgcolor: theme.surface,
+            bgcolor: theme.secondary,
             borderRadius: 999,
             px: 2,
             "& fieldset": { border: "none" },
