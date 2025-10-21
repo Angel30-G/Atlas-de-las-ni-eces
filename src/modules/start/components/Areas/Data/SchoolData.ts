@@ -26,14 +26,14 @@ export const schoolData: School[] = [
   },
   {
     id: 3,
-    title: "Zona San José",
-    subheader: "15 de junio 2023",
-    image: "/assets/images/zones/sanjose_2023.jpg",
-    description: "Escuela Juan Rafael Mora - San José",
-    href: "/lugares/sanjose",
-    province: "San José",
-    canton: "San José",
-    schoolName: "Escuela Juan Rafael Mora"
+    title: "Escuela Guatemala",
+    subheader: "02 Octubre 2025",
+    image: "/assets/images/zones/Guatemala.jpg",
+    description: "Escuela Republica de Guatemala - Alajuela",
+    href: "/lugares/escuelaGuatemala",
+    province: "Alajuela",
+    canton: "Alajueña",
+    schoolName: "Escuela Republica de Guatemala"
   },
   {
     id: 4,

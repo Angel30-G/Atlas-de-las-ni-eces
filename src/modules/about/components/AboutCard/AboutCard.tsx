@@ -49,6 +49,7 @@ export default function AboutUs() {
           background: `radial-gradient(circle, ${theme.secondary}30 0%, transparent 70%)`,
           borderRadius: "50%",
           animation: "float 8s infinite ease-in-out",
+          fontFamily: "'Josefin Sans', sans-serif",
           filter: "blur(20px)",
           "@keyframes float": {
             "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
@@ -83,6 +84,7 @@ export default function AboutUs() {
         sx={{
           background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary} 100%)`,
           overflow: "hidden",
+          fontFamily: "'Josefin Sans', sans-serif",
         }}
       >
         {/* Patrón decorativo */}
@@ -95,6 +97,7 @@ export default function AboutUs() {
             bottom: 0,
             backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.secondary}20 2px, transparent 2px)`,
             backgroundSize: "50px 50px",
+            fontFamily: "'Josefin Sans', sans-serif",
             animation: "movePattern 20s infinite linear",
             "@keyframes movePattern": {
               "0%": { transform: "translate(0, 0)" },
@@ -131,6 +134,7 @@ export default function AboutUs() {
                 transform: "translateY(-50%)",
                 fontSize: isSmall ? "2.5rem" : "3rem",
                 animation: "spin 10s infinite linear",
+                fontFamily: "'Josefin Sans', sans-serif",
                 "@keyframes spin": {
                   "0%": { transform: "translateY(-50%) rotate(0deg)" },
                   "100%": { transform: "translateY(-50%) rotate(360deg)" },
@@ -144,6 +148,7 @@ export default function AboutUs() {
                 transform: "translateY(-50%)",
                 fontSize: isSmall ? "2rem" : "2.5rem",
                 animation: "bounce 2s infinite ease-in-out",
+                fontFamily: "'Josefin Sans', sans-serif",
                 "@keyframes bounce": {
                   "0%, 100%": { transform: "translateY(-50%) scale(1)" },
                   "50%": { transform: "translateY(-50%) scale(1.2)" },
@@ -166,6 +171,7 @@ export default function AboutUs() {
               backdropFilter: "blur(10px)",
               padding: 4,
               borderRadius: 4,
+              fontFamily: "'Josefin Sans', sans-serif",
               border: "1px solid rgba(255,255,255,0.2)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
             }}
@@ -186,6 +192,7 @@ export default function AboutUs() {
               "@keyframes bounceArrow": {
                 "0%, 100%": { transform: "translateY(0)" },
                 "50%": { transform: "translateY(10px)" },
+                fontFamily: "'Josefin Sans', sans-serif",
               },
             }}
           >
@@ -218,6 +225,7 @@ export default function AboutUs() {
           transform: isVisible ? "translateY(0)" : "translateY(50px)",
           opacity: isVisible ? 1 : 0,
           transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s",
+          fontFamily: "'Josefin Sans', sans-serif",
         }}
       >
         <Stack
@@ -242,6 +250,7 @@ export default function AboutUs() {
               boxShadow: `0 20px 60px ${theme.primary}20`,
               transform: "translateY(-5px)",
               transition: "all 0.3s ease",
+              fontFamily: "'Josefin Sans', sans-serif",
             },
           }}
         >
@@ -260,6 +269,7 @@ export default function AboutUs() {
                   display: "flex",
                   alignItems: "center",
                   gap: 2,
+                  fontFamily: "'Josefin Sans', sans-serif",
                 }}
               >
                 <Box sx={{ animation: "pulse 2s infinite" }}>
@@ -293,6 +303,7 @@ export default function AboutUs() {
                   background: "rgba(255,255,255,0.8)",
                   boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
                   borderLeft: `4px solid ${theme.primary}`,
+                  fontFamily: "'Josefin Sans', sans-serif",
                 }}
               >
                 Somos un equipo interdisciplinario comprometido con la
@@ -313,6 +324,7 @@ export default function AboutUs() {
                   boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
                   borderLeft: `4px solid ${theme.secondary}`,
                   position: "relative",
+                  fontFamily: "'Josefin Sans', sans-serif",
                 }}
               >
                 Fomentamos especialmente la participación activa de{" "}
@@ -330,6 +342,7 @@ export default function AboutUs() {
                     "@keyframes wiggle": {
                       "0%, 100%": { transform: "rotate(-5deg)" },
                       "50%": { transform: "rotate(5deg)" },
+                      fontFamily: "'Josefin Sans', sans-serif",
                     },
                   }}
                 >
@@ -350,6 +363,7 @@ export default function AboutUs() {
                 fontSize: isSmall ? "0.9rem" : "1rem",
                 textTransform: "none",
                 boxShadow: `0 8px 25px ${theme.primary}40`,
+                fontFamily: "'Josefin Sans', sans-serif",
                 "&:hover": {
                   background: `linear-gradient(135deg, ${theme.secondary}, ${theme.primary})`,
                   transform: "translateY(-3px)",
@@ -376,6 +390,7 @@ export default function AboutUs() {
               aspectRatio: "4/4",
               borderRadius: 3,
               boxShadow: `0 15px 40px ${theme.primary}30`,
+              fontFamily: "'Josefin Sans', sans-serif",
               "&:hover img": {
                 transform: "scale(1.05)",
               },
@@ -469,6 +484,7 @@ export default function AboutUs() {
               boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
               textAlign: "center",
               transition: "all 0.3s ease",
+              fontFamily: "'Josefin Sans', sans-serif",
               border: `2px solid ${theme.primary}20`,
               "&:hover": {
                 transform: "translateY(-10px)",
@@ -476,10 +492,10 @@ export default function AboutUs() {
               },
             }}
           >
-            <Typography variant="h2" sx={{ mb: 2, animation: "bounce 2s infinite" }}>
+            <Typography variant="h2" sx={{ mb: 2, animation: "bounce 2s infinite", fontFamily: "'Josefin Sans', sans-serif" }}>
               {item.icon}
             </Typography>
-            <Typography variant="h5" fontWeight="bold" color={theme.primary} sx={{ mb: 2 }}>
+            <Typography variant="h5" fontWeight="bold" color={theme.primary} sx={{ mb: 2, fontFamily: "'Josefin Sans', sans-serif", }}>
               {item.title}
             </Typography>
             <Typography variant="body1" color={theme.text2}>
