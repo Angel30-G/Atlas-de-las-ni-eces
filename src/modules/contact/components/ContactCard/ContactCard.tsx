@@ -54,7 +54,7 @@ export default function ContactCard() {
         overflow: "hidden",
       }}
     >
-      {/* === Fondo de ilustraciones a la derecha === */}
+      {/* Fondo de ilustraciones a la derecha */}
       <Box
         aria-hidden
         sx={{
@@ -86,11 +86,11 @@ export default function ContactCard() {
           }}
         />
 
-        {/* Monito — centrado verticalmente, alineado al borde derecho */}
+        {/* Dibujito */}
         <Box
           sx={{
             position: "absolute",
-            right: "1%", // ajusta entre 0% y 2% si querés moverlo más
+            right: "1%", 
             top: "50%",
             transform: "translateY(-50%)",
             width: "32%",
@@ -104,7 +104,7 @@ export default function ContactCard() {
         />
       </Box>
 
-      {/* === Formulario === */}
+      {/* Formulario*/}
       <Box
         sx={{
           width: { xs: "100%", md: "65%" },
@@ -221,7 +221,7 @@ export default function ContactCard() {
               sx={{
                 fontWeight: 800,
                 textTransform: "lowercase",
-                fontSize: "1.1rem",
+                fontSize: "2.1rem",
                 color: theme.primary,
                 gap: 1,
                 "&:hover": { opacity: 0.9, background: "transparent" },

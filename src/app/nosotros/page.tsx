@@ -10,7 +10,6 @@ export default function About() {
     <>
       <Stack width={"100%"}>
         <AboutCard />
-        <Principes />
         <BrochureSection 
           brochureLink="/documents/alajuela/brochure-alajuela.pdf"
           pdfDownloadLink="/documents/alajuela/brochure-alajuela.pdf"

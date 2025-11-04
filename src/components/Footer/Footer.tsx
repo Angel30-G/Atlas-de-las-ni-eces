@@ -1,7 +1,9 @@
+"use client";
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@/theme/ThemeProvider";
 import Image from "next/image";
 import EmailIcon from "@mui/icons-material/Email";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 type footerProps = {
   colored?: boolean;
@@ -15,26 +17,24 @@ export default function Footer({ colored }: footerProps) {
       width="100%"
       px={{ xs: 2, md: 4 }}
       py={{ xs: 6, md: 0 }}
-      bgcolor={colored ? theme.primary : "white"}
+      bgcolor={colored ? theme.primary : theme.primary} // ✅ fondo theme.primary
       display="flex"
       flexDirection={{ xs: "column", md: "row" }}
       alignItems="center"
       justifyContent="space-between"
       gap={{ xs: 3, md: 0 }}
       position="relative"
-      height={{ xs: "auto", md: 100 }}
+      height={{ xs: "auto", md: 120 }}
     >
-      {/* Logo flotante para mobile y desktop */}
+      {/* */}
       <Box
         sx={{
           position: "absolute",
-          top: { xs: -50, md: -60 },
+          top: { xs: 6, md: 8 },
           left: { xs: "50%", md: 20 },
           transform: { xs: "translateX(-50%)", md: "none" },
           width: 100,
           height: 100,
-          backgroundColor: "white",
-          borderRadius: "16px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -43,8 +43,8 @@ export default function Footer({ colored }: footerProps) {
         }}
       >
         <Image
-          src="/assets/images/LabExp.jpg"
-          alt="Laboratorio Experimental"
+          src="/bicho-lupa.png" 
+          alt="Atlas de las Niñeces"
           width={85}
           height={85}
           style={{ objectFit: "contain" }}
@@ -63,13 +63,13 @@ export default function Footer({ colored }: footerProps) {
         <Typography
           variant="subtitle2"
           fontWeight="bold"
-          color={colored ? theme.text1 : theme.text2}
+          color="white"
           textAlign="center"
           sx={{
             maxWidth: { xs: "100%", sm: 500 },
             fontSize: { xs: "0.85rem", sm: "0.95rem" },
             transition: "color 0.3s ease",
-            "&:hover": { color: colored ? "white" : theme.primary },
+            "&:hover": { color: "#E0E0E0" },
           }}
         >
           La opinión de las infancias sobre la ciudad es muy importante para la
@@ -77,42 +77,87 @@ export default function Footer({ colored }: footerProps) {
         </Typography>
       </Box>
 
-      {/* Contacto */}
+      {/*Contacto */}
       <Box
         display="flex"
         alignItems="center"
-        gap={1}
-        minWidth={120}
         justifyContent="center"
+        gap={3}
         sx={{
-          cursor: "pointer",
-          "&:hover .icon": {
-            transform: "rotate(10deg)",
-          },
+          flexDirection: { xs: "column", sm: "row" },
         }}
       >
-        <EmailIcon
-          className="icon"
+        {/* Correo */}
+        <Box
+          display="flex"
+          alignItems="center"
+          gap={1}
           sx={{
-            fontSize: 22,
-            color: colored ? "white" : theme.primary,
-            transition: "transform 0.3s ease",
-          }}
-        />
-        <Typography
-          fontSize="0.9rem"
-          fontWeight="500"
-          color={colored ? "white" : theme.primary}
-          sx={{
-            transition: "text-decoration 0.3s ease, color 0.3s ease",
-            "&:hover": {
-              textDecoration: "underline",
-              color: colored ? "white" : theme.primary,
+            cursor: "pointer",
+            "&:hover .icon": {
+              transform: "rotate(10deg)",
             },
           }}
         >
-          contacto@labexp.com
-        </Typography>
+          <EmailIcon
+            className="icon"
+            sx={{
+              fontSize: 22,
+              color: "white",
+              transition: "transform 0.3s ease",
+            }}
+          />
+          <Typography
+            fontSize="0.9rem"
+            fontWeight="500"
+            color="white"
+            sx={{
+              transition: "text-decoration 0.3s ease, color 0.3s ease",
+              "&:hover": {
+                textDecoration: "underline",
+                color: "#E0E0E0",
+              },
+            }}
+          >
+            contacto@labexp.com
+          </Typography>
+        </Box>
+
+        {/* Instagram */}
+        <Box
+          display="flex"
+          alignItems="center"
+          gap={1}
+          sx={{
+            cursor: "pointer",
+            "&:hover .icon": {
+              transform: "rotate(10deg)",
+            },
+          }}
+        >
+          <InstagramIcon
+            className="icon"
+            sx={{
+              fontSize: 22,
+              color: "white",
+              transition: "transform 0.3s ease",
+            }}
+          />
+          <Typography
+            fontSize="0.9rem"
+            fontWeight="500"
+            color="white"
+            sx={{
+              transition: "text-decoration 0.3s ease, color 0.3s ease",
+              "&:hover": {
+                textDecoration: "underline",
+                color: "#E0E0E0",
+              },
+            }}
+          >
+            @WaiDanYuan
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

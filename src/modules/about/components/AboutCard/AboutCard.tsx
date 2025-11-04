@@ -1,509 +1,285 @@
 "use client";
-import { Box, Stack, Typography, Divider, Button } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useTheme } from "@/theme/ThemeProvider";
-import { useState, useRef, useEffect } from "react";
+
+/* Helper: HEX → RGBA */
+function hexToRgba(hex: string, alpha = 1) {
+  const clean = hex.replace("#", "");
+  const bigint = parseInt(
+    clean.length === 3 ? clean.split("").map((c) => c + c).join("") : clean,
+    16
+  );
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
 
 export default function AboutUs() {
   const { theme, isSmall } = useTheme();
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <Box
-      width="100%"
-      minHeight="100vh"
-      bgcolor={theme.background}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      position="relative"
-      overflow="hidden"
-    >
-      {/* Elementos decorativos de fondo */}
+    <Box width="100%" fontFamily="'Josefin Sans', sans-serif">
+      {/* ================= HERO ================= */}
       <Box
         sx={{
-          position: "absolute",
-          top: "10%",
-          left: "5%",
-          width: 100,
-          height: 100,
-          background: `radial-gradient(circle, ${theme.secondary}30 0%, transparent 70%)`,
-          borderRadius: "50%",
-          animation: "float 8s infinite ease-in-out",
-          fontFamily: "'Josefin Sans', sans-serif",
-          filter: "blur(20px)",
-          "@keyframes float": {
-            "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
-            "50%": { transform: "translateY(-30px) rotate(180deg)" },
-          },
-        }}
-      />
-      
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "20%",
-          right: "8%",
-          width: 150,
-          height: 150,
-          background: `radial-gradient(circle, ${theme.primary}20 0%, transparent 70%)`,
-          borderRadius: "50%",
-          animation: "float 6s infinite ease-in-out 1s",
-          filter: "blur(25px)",
-        }}
-      />
-
-      {/* Hero Section - Título y descripción principal */}
-      <Box
-        width="100%"
-        minHeight="70vh"
-        bgcolor={theme.primary}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        position="relative"
-        sx={{
-          background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary} 100%)`,
+          position: "relative",
+          backgroundColor: theme.primary,
+          color: "white",
+          py: { xs: 10, md: 14 },
+          px: 3,
+          textAlign: "center",
           overflow: "hidden",
-          fontFamily: "'Josefin Sans', sans-serif",
         }}
       >
-        {/* Patrón decorativo */}
+        {/* Estrella */}
         <Box
           sx={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.secondary}20 2px, transparent 2px)`,
-            backgroundSize: "50px 50px",
-            fontFamily: "'Josefin Sans', sans-serif",
-            animation: "movePattern 20s infinite linear",
-            "@keyframes movePattern": {
-              "0%": { transform: "translate(0, 0)" },
-              "100%": { transform: "translate(50px, 50px)" },
-            },
-          }}
-        />
-
-        <Stack
-          spacing={4}
-          width="100%"
-          maxWidth="1200px"
-          textAlign="center"
-          px={3}
-          sx={{
-            transform: isVisible ? "translateY(0)" : "translateY(50px)",
-            opacity: isVisible ? 1 : 0,
-            transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+            bottom: { xs: "-14%", md: "-17%" },
+            left: { xs: "-7%", md: "-3%" },
+            width: { xs: "38%", md: "26%" },
+            aspectRatio: "1 / 1",
+            opacity: 0.9,
+            pointerEvents: "none",
+            userSelect: "none",
+            zIndex: 1,
+            filter:
+              "brightness(0) saturate(100%) invert(90%) sepia(4%) saturate(350%) hue-rotate(175deg) brightness(100%) contrast(95%)",
           }}
         >
+          <img
+            src="/Vector3.png"
+            alt=""
+            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+          />
+        </Box>
+
+        {/* Garabato */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: { xs: "-8%", md: "-10%" },
+            right: { xs: "1%", md: "-9%" }, 
+            width: { xs: "72%", md: "48%" },    
+            aspectRatio: "3 / 1",
+            opacity: 0.9,
+            pointerEvents: "none",
+            userSelect: "none",
+            zIndex: 1,
+            filter:
+              "brightness(0) saturate(100%) invert(90%) sepia(4%) saturate(350%) hue-rotate(175deg) brightness(100%) contrast(95%)",
+          }}
+        >
+          <img
+            src="/Vector4.png"
+            alt=""
+            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+          />
+        </Box>
+
+        {/* Título y texto */}
+        <Stack
+          spacing={3}
+          alignItems="center"
+          maxWidth="1000px"
+          mx="auto"
+          position="relative"
+          zIndex={2}
+        >
           <Typography
-            variant={isSmall ? "h3" : "h1"}
-            fontWeight="bold"
-            color="white"
+            component="h1"
             sx={{
-              textShadow: "0 4px 8px rgba(0,0,0,0.3)",
-              position: "relative",
-              display: "inline-block",
-              "&::before": {
-                content: '"🌎"',
-                position: "absolute",
-                left: -60,
-                top: "50%",
-                transform: "translateY(-50%)",
-                fontSize: isSmall ? "2.5rem" : "3rem",
-                animation: "spin 10s infinite linear",
-                fontFamily: "'Josefin Sans', sans-serif",
-                "@keyframes spin": {
-                  "0%": { transform: "translateY(-50%) rotate(0deg)" },
-                  "100%": { transform: "translateY(-50%) rotate(360deg)" },
-                },
-              },
-              "&::after": {
-                content: '"👧👦"',
-                position: "absolute",
-                right: -80,
-                top: "50%",
-                transform: "translateY(-50%)",
-                fontSize: isSmall ? "2rem" : "2.5rem",
-                animation: "bounce 2s infinite ease-in-out",
-                fontFamily: "'Josefin Sans', sans-serif",
-                "@keyframes bounce": {
-                  "0%, 100%": { transform: "translateY(-50%) scale(1)" },
-                  "50%": { transform: "translateY(-50%) scale(1.2)" },
-                },
-              },
+              fontWeight: 800,
+              letterSpacing: "0.03em",
+              lineHeight: 1.1,
+              textTransform: "uppercase",
+              fontSize: { xs: "2.2rem", sm: "2.8rem", md: "3.4rem", lg: "4rem" },
             }}
           >
             ATLAS DE LAS NIÑECES
           </Typography>
-          
+
           <Typography
-            variant={isSmall ? "body1" : "h5"}
-            color="white"
-            lineHeight={1.8}
-            width="100%"
-            maxWidth="900px"
-            mx="auto"
+            component="p"
             sx={{
-              background: "rgba(255,255,255,0.1)",
-              backdropFilter: "blur(10px)",
-              padding: 4,
-              borderRadius: 4,
-              fontFamily: "'Josefin Sans', sans-serif",
-              border: "1px solid rgba(255,255,255,0.2)",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+              maxWidth: "860px",
+              fontSize: { xs: "1rem", md: "1.125rem" },
+              lineHeight: 1.8,
+              color: "white",
+              textAlign: "center",
+              fontWeight: 300,
             }}
           >
-            Es resultado de un proyecto de extensión universitaria del Tecnológico 
-            de Costa Rica (TEC) que busca visibilizar cómo las infancias perciben 
-            y experimentan el territorio que habitan. Frente a un modelo de 
-            planificación históricamente adultocéntrico, este proyecto propone una 
-            ruptura simbólica al reconocer a niños y niñas como sujetos activos 
-            con capacidad de análisis, opinión y propuesta sobre los espacios que 
-            habitan.
+            Es resultado de un proyecto de extensión universitaria del Tecnológico de
+            Costa Rica (TEC) que busca visibilizar cómo las infancias perciben y
+            experimentan el territorio que habitan. Frente a un modelo de planificación
+            históricamente adultocéntrico, este proyecto propone una ruptura simbólica
+            al reconocer a niñas y niños como sujetos activos con capacidad de análisis,
+            opinión y propuesta sobre los espacios que habitan.
           </Typography>
-
-          {/* Flecha indicadora */}
-          <Box
-            sx={{
-              animation: "bounceArrow 2s infinite ease-in-out",
-              "@keyframes bounceArrow": {
-                "0%, 100%": { transform: "translateY(0)" },
-                "50%": { transform: "translateY(10px)" },
-                fontFamily: "'Josefin Sans', sans-serif",
-              },
-            }}
-          >
-            <Typography variant="h4" color="white">
-              ⬇️
-            </Typography>
-          </Box>
         </Stack>
-
-        {/* Imagen decorativa en esquina */}
-        <Image
-          src="/assets/vectors/compass.svg"
-          alt="Brújula"
-          width={120}
-          height={120}
-          style={{
-            position: "absolute",
-            bottom: 20,
-            right: 20,
-            opacity: 0.7,
-            animation: "rotateSlow 20s infinite linear",
-          }}
-        />
       </Box>
 
-      {/* Sección Quiénes Somos */}
-      <Box
-        ref={sectionRef}
-        sx={{
-          transform: isVisible ? "translateY(0)" : "translateY(50px)",
-          opacity: isVisible ? 1 : 0,
-          transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s",
-          fontFamily: "'Josefin Sans', sans-serif",
-        }}
-      >
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          alignItems="center"
-          justifyContent="space-between"
-          width="100%"
-          maxWidth="1400px"
-          minHeight="400px"
-          boxShadow={6}
-          p={6}
-          borderRadius={4}
-          bgcolor={theme.surface}
-          spacing={6}
-          position="relative"
-          mb={6}
-          mt={10}
+      {/* ================= ¿QUIÉNES SOMOS? ================= */}
+      <Box sx={{ py: { xs: 6, md: 8 }, px: { xs: 2, md: 3 } }}>
+        <Box
           sx={{
-            background: `linear-gradient(135deg, ${theme.surface} 0%, ${theme.background} 100%)`,
-            border: `2px solid ${theme.primary}20`,
-            "&:hover": {
-              boxShadow: `0 20px 60px ${theme.primary}20`,
-              transform: "translateY(-5px)",
-              transition: "all 0.3s ease",
-              fontFamily: "'Josefin Sans', sans-serif",
-            },
+            maxWidth: "1200px",
+            mx: "auto",
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1.1fr 0.9fr" },
+            gap: 0,
+            alignItems: "stretch",
           }}
         >
-          {/* Texto a la izquierda */}
-          <Stack spacing={4} flex={1} justifyContent="center">
-            <Box>
-              <Typography
-                variant={isSmall ? "h4" : "h3"}
-                fontWeight="bold"
-                color={theme.primary}
-                sx={{
-                  background: `linear-gradient(45deg, ${theme.primary}, ${theme.secondary})`,
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  fontFamily: "'Josefin Sans', sans-serif",
-                }}
-              >
-                <Box sx={{ animation: "pulse 2s infinite" }}>
-                  🤝
-                </Box>
-                ¿QUIÉNES SOMOS?
-              </Typography>
-
-              <Divider 
-                sx={{ 
-                  width: 100, 
-                  height: 4,
-                  borderColor: theme.secondary, 
-                  borderWidth: 2,
-                  borderRadius: 2,
-                  mt: 2,
-                  background: `linear-gradient(90deg, ${theme.primary}, ${theme.secondary})`,
-                }} 
-              />
-            </Box>
-
-            <Stack spacing={3}>
-              <Typography
-                variant={isSmall ? "body1" : "h6"}
-                fontWeight={400}
-                color={theme.text2}
-                lineHeight={1.8}
-                sx={{
-                  padding: 3,
-                  borderRadius: 3,
-                  background: "rgba(255,255,255,0.8)",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                  borderLeft: `4px solid ${theme.primary}`,
-                  fontFamily: "'Josefin Sans', sans-serif",
-                }}
-              >
-                Somos un equipo interdisciplinario comprometido con la
-                transformación urbana participativa. Trabajamos en conjunto con
-                comunidades locales para mapear, comprender y visibilizar sus
-                entornos.
-              </Typography>
-
-              <Typography
-                variant={isSmall ? "body1" : "h6"}
-                fontWeight={400}
-                color={theme.text2}
-                lineHeight={1.8}
-                sx={{
-                  padding: 3,
-                  borderRadius: 3,
-                  background: "rgba(255,255,255,0.8)",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                  borderLeft: `4px solid ${theme.secondary}`,
-                  position: "relative",
-                  fontFamily: "'Josefin Sans', sans-serif",
-                }}
-              >
-                Fomentamos especialmente la participación activa de{" "}
-                <strong style={{ color: theme.primary }}>niñas y niños</strong> en procesos de planificación,
-                reconociendo sus voces, vivencias y conocimientos como esenciales
-                para construir ciudades más humanas, justas y significativas.
-                
-                {/* Decoración infantil */}
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: -10,
-                    right: 20,
-                    animation: "wiggle 3s infinite ease-in-out",
-                    "@keyframes wiggle": {
-                      "0%, 100%": { transform: "rotate(-5deg)" },
-                      "50%": { transform: "rotate(5deg)" },
-                      fontFamily: "'Josefin Sans', sans-serif",
-                    },
-                  }}
-                >
-                  <Typography variant="h5">🎨</Typography>
-                </Box>
-              </Typography>
-            </Stack>
-
-            {/* Botón de acción */}
-            <Button
-              variant="contained"
+          {/* Izquierda: tarjeta con degradado */}
+          <Box
+            sx={{
+              position: "relative",
+              p: { xs: 3, md: 4, lg: 5 },
+              backgroundImage: `linear-gradient(90deg, ${hexToRgba(theme.primary, 0.95)} 0%, ${hexToRgba(
+                theme.primary,
+                0.55
+              )} 52%, ${hexToRgba(theme.primary, 0.18)} 100%)`,
+              color: hexToRgba("#1E2A39", 0.9),
+              borderRadius: { xs: "24px 24px 0 0", md: "28px 0 0 28px" },
+              boxShadow: "0 10px 24px rgba(0,0,0,0.08)",
+              minHeight: { xs: 320, md: 380 },
+            }}
+          >
+            <Typography
+              variant={isSmall ? "h4" : "h3"}
               sx={{
-                padding: "12px 32px",
-                borderRadius: "50px",
-                background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
-                color: "white",
-                fontWeight: "bold",
-                fontSize: isSmall ? "0.9rem" : "1rem",
-                textTransform: "none",
-                boxShadow: `0 8px 25px ${theme.primary}40`,
-                fontFamily: "'Josefin Sans', sans-serif",
-                "&:hover": {
-                  background: `linear-gradient(135deg, ${theme.secondary}, ${theme.primary})`,
-                  transform: "translateY(-3px)",
-                  boxShadow: `0 12px 35px ${theme.primary}60`,
-                },
-                transition: "all 0.3s ease",
-                maxWidth: "250px",
+                fontWeight: 800,
+                color: hexToRgba("#133E74", 0.9),
+                mb: { xs: 2, md: 3 },
+                textTransform: "uppercase",
+                letterSpacing: "0.02em",
               }}
             >
-              Conoce más sobre nosotros
-            </Button>
-          </Stack>
+              ¿Quiénes somos?
+            </Typography>
 
-          {/* Imagen a la derecha */}
+            <Typography
+              sx={{
+                color: hexToRgba("#0B1A2B", 0.85),
+                lineHeight: 1.7,
+                fontSize: { xs: "1rem", md: "1.1rem" },
+                maxWidth: "52ch",
+              }}
+            >
+              Somos un equipo interdisciplinario comprometido con la transformación
+              urbana participativa. Trabajamos en conjunto con comunidades locales
+              para mapear, comprender y visibilizar sus entornos.
+            </Typography>
+
+            <Typography
+              sx={{
+                mt: 2.5,
+                color: hexToRgba("#0B1A2B", 0.85),
+                lineHeight: 1.7,
+                fontSize: { xs: "1rem", md: "1.1rem" },
+                maxWidth: "62ch",
+              }}
+            >
+              Fomentamos especialmente la participación activa de niñas y niños en
+              procesos de planificación, reconociendo sus voces, vivencias y
+              conocimientos como esenciales para construir ciudades más humanas,
+              justas y significativas.
+            </Typography>
+          </Box>
+
+          {/* Derecha: imagen */}
           <Box
-            flex={1}
-            height="100%"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            position="relative"
             sx={{
+              position: "relative",
+              minHeight: { xs: 240, md: 380 },
+              borderRadius: { xs: "0 0 24px 24px", md: "0 28px 28px 0" },
               overflow: "hidden",
-              aspectRatio: "4/4",
-              borderRadius: 3,
-              boxShadow: `0 15px 40px ${theme.primary}30`,
-              fontFamily: "'Josefin Sans', sans-serif",
-              "&:hover img": {
-                transform: "scale(1.05)",
-              },
+              boxShadow: "0 10px 24px rgba(0,0,0,0.08)",
             }}
           >
             <Image
               src="/assets/heroImages/Hero8.jpg"
               alt="Equipo de trabajo en campo"
               fill
-              style={{
-                objectFit: "cover",
-                transition: "transform 0.5s ease",
-              }}
-            />
-            
-            {/* Overlay decorativo */}
-            <Box
-              sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: `linear-gradient(45deg, ${theme.primary}20, transparent)`,
-                opacity: 0.6,
-              }}
+              style={{ objectFit: "cover" }}
+              priority
             />
           </Box>
-
-          {/* Elementos decorativos en esquinas */}
-          <Image
-            src="/assets/vectors/idea.svg"
-            alt="idea"
-            width={isSmall ? 70 : 100}
-            height={isSmall ? 70 : 100}
-            style={{
-              position: "absolute",
-              top: -30,
-              right: -20,
-              transform: "rotate(15deg)",
-              filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.2))",
-              animation: "float 4s infinite ease-in-out",
-            }}
-          />
-
-          <Box
-            sx={{
-              position: "absolute",
-              bottom: -20,
-              left: -20,
-              animation: "bounce 3s infinite ease-in-out",
-            }}
-          >
-            <Typography variant="h3">📚</Typography>
-          </Box>
-
-          <Box
-            sx={{
-              position: "absolute",
-              top: 20,
-              left: 20,
-              animation: "pulse 2s infinite ease-in-out 1s",
-            }}
-          >
-            <Typography variant="h4">🌟</Typography>
-          </Box>
-        </Stack>
+        </Box>
       </Box>
 
-      {/* Sección adicional - Valores */}
+      {/* ================= ACTIVIDADES / METODOLOGÍA / LOGROS ================= */}
       <Stack
         direction={{ xs: "column", md: "row" }}
-        spacing={4}
-        width="100%"
-        maxWidth="1400px"
-        mb={10}
+        spacing={6}
+        justifyContent="center"
+        alignItems="stretch"
+        maxWidth="1200px"
+        mx="auto"
         px={3}
+        mb={12}
       >
-        {[
-          { icon: "🎯", title: "Misión", text: "Visibilizar las perspectivas infantiles sobre el territorio" },
-          { icon: "👁️", title: "Visión", text: "Ciudades más inclusivas y participativas para todos" },
-          { icon: "❤️", title: "Valores", text: "Participación, inclusión y perspectiva infantil" }
-        ].map((item, index) => (
-          <Box
-            key={index}
-            sx={{
-              flex: 1,
-              padding: 4,
-              borderRadius: 4,
-              background: "white",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
-              textAlign: "center",
-              transition: "all 0.3s ease",
-              fontFamily: "'Josefin Sans', sans-serif",
-              border: `2px solid ${theme.primary}20`,
-              "&:hover": {
-                transform: "translateY(-10px)",
-                boxShadow: `0 20px 40px ${theme.primary}20`,
-              },
-            }}
-          >
-            <Typography variant="h2" sx={{ mb: 2, animation: "bounce 2s infinite", fontFamily: "'Josefin Sans', sans-serif" }}>
-              {item.icon}
-            </Typography>
-            <Typography variant="h5" fontWeight="bold" color={theme.primary} sx={{ mb: 2, fontFamily: "'Josefin Sans', sans-serif", }}>
-              {item.title}
-            </Typography>
-            <Typography variant="body1" color={theme.text2}>
-              {item.text}
-            </Typography>
-          </Box>
-        ))}
+        <Feature
+          title="ACTIVIDADES"
+          image="/assets/heroImages/nosotros1.jpg"
+          text="A través de talleres participativos realizados en escuelas públicas de distintas localidades del país, facilitados por población estudiantil del TEC junto a personas extensionistas y docentes."
+          color={theme.primary}
+        />
+        <Feature
+          title="METODOLOGÍA"
+          image="/assets/heroImages/nosotros3.jpg"
+          text="La metodología utilizada se basa en el mapeo participativo o cartografía social, una herramienta crítica que permite a las comunidades representar colectivamente su experiencia territorial."
+          color={theme.primary}
+        />
+        <Feature
+          title="LOGROS"
+          image="/assets/heroImages/nosotros2.jpg"
+          text="Se recopilan mapas, dibujos y narrativas creadas por niños y niñas entre los 9 y 10 años, que reflejan sus vivencias, preocupaciones, deseos y vínculos con el espacio público."
+          color={theme.primary}
+        />
       </Stack>
     </Box>
+  );
+}
+
+/* ======= Componente auxiliar ======= */
+function Feature({
+  title,
+  image,
+  text,
+  color,
+}: {
+  title: string;
+  image: string;
+  text: string;
+  color: string;
+}) {
+  return (
+    <Stack flex={1} spacing={2} alignItems="flex-start">
+      <Typography variant="h5" fontWeight={700} sx={{ textTransform: "uppercase", color }}>
+        {title}
+      </Typography>
+
+      <Box
+        sx={{
+          position: "relative",
+          borderRadius: 2,
+          overflow: "hidden",
+          width: "100%",
+          height: 200,
+          boxShadow: 2,
+        }}
+      >
+        <Image src={image} alt={title} fill style={{ objectFit: "cover" }} />
+      </Box>
+
+      <Typography variant="body2" color="text.primary" lineHeight={1.6}>
+        {text}
+      </Typography>
+    </Stack>
   );
 }

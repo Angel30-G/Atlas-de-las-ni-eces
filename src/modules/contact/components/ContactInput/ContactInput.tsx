@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, TextField, Typography } from "@mui/material";
-import { useTheme } from "@/theme/ThemeProvider";
+import { useTheme } from "@/theme/ThemeProvider"; 
 
 type Props = {
   type: "text" | "email" | "area";
@@ -12,6 +12,8 @@ type Props = {
   error?: any;
 };
 
+const CREAM = "#EBDDBA"; 
+
 export default function ContactInput({
   type,
   label,
@@ -20,22 +22,27 @@ export default function ContactInput({
   rules,
   error,
 }: Props) {
-  const { theme } = useTheme();
+  const { theme } = useTheme(); 
 
   return (
     <Box>
+      {/* LABEL dinamico */}
       <Typography
         sx={{
           color: theme.primary,
-          fontWeight: 800,
-          fontStyle: "italic",
-          letterSpacing: "0.02em",
+          fontFamily: "'Josefin Sans', sans-serif",
+          fontWeight: 700,
+          textTransform: "uppercase",
+          letterSpacing: "0.06em",
+          fontSize: 24,
+          lineHeight: 1.1,
           mb: 1,
         }}
       >
         {label}
       </Typography>
 
+      {/* INPUT */}
       <TextField
         fullWidth
         multiline={type === "area"}
@@ -45,17 +52,36 @@ export default function ContactInput({
         error={Boolean(error)}
         helperText={error?.message}
         variant="outlined"
-        sx={{
-          "& .MuiOutlinedInput-root": {
-            bgcolor: theme.secondary,
-            borderRadius: 999,
+        InputProps={{
+          sx: {
+            backgroundColor: `${CREAM} !important`,
+            borderRadius: type === "area" ? 28 : 999,
             px: 2,
-            "& fieldset": { border: "none" },
-            "&:hover fieldset": { border: "none" },
-            "&.Mui-focused fieldset": { border: "none" },
+            fontFamily: "'Josefin Sans', sans-serif",
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: "none !important",
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              border: "none !important",
+            },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              border: "none !important",
+            },
+            "& input:-webkit-autofill, & textarea:-webkit-autofill": {
+              WebkitTextFillColor: "#3B3B3B",
+              WebkitBoxShadow: `0 0 0 1000px ${CREAM} inset`,
+              boxShadow: `0 0 0 1000px ${CREAM} inset`,
+              transition: "background-color 9999s ease-out 0s",
+            },
           },
+        }}
+        sx={{
           "& .MuiInputBase-input": {
             py: type === "area" ? 2 : 1.2,
+            fontFamily: "'Josefin Sans', sans-serif",
+          },
+          "& .MuiFormHelperText-root": {
+            fontFamily: "'Josefin Sans', sans-serif",
           },
         }}
       />
