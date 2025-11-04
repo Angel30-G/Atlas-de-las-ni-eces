@@ -3,7 +3,6 @@ import { Box, Container, Stack, Typography } from "@mui/material";
 import { useTheme } from "@/theme/ThemeProvider";
 import Hero from "@/modules/start/components/Hero";
 
-// Extract repeated styles
 const titleStyles = {
   fontFamily: "'Josefin Sans', sans-serif",
   fontWeight: 700,
@@ -40,7 +39,6 @@ export default function NinecesMapeando() {
         NIÑECES MAPEANDO
       </Typography>
 
-      {/* === Usando Box en lugar de Grid === */}
       <Box
         sx={{
           display: 'flex',
@@ -49,7 +47,7 @@ export default function NinecesMapeando() {
           alignItems: 'flex-start'
         }}
       >
-        {/* Izquierda: carrusel (Hero en modo minimal) */}
+        {/* Izquierda: carrusel*/}
         <Box sx={{ width: { xs: '100%', md: '58.3%' } }}>
           <Hero minimal height={{ xs: 260, md: 420 }} />
           <Stack direction="row" spacing={1} justifyContent="center" sx={{ mt: 2 }}>
