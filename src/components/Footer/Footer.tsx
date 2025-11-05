@@ -63,7 +63,7 @@ export default function Footer({ colored }: footerProps) {
         <Typography
           variant="subtitle2"
           fontWeight="bold"
-          color="white"
+          color= {colored ? theme.text1 : theme.text1}
           textAlign="center"
           sx={{
             maxWidth: { xs: "100%", sm: 500 },
@@ -103,14 +103,14 @@ export default function Footer({ colored }: footerProps) {
             className="icon"
             sx={{
               fontSize: 22,
-              color: "white",
+              color: theme.text1,
               transition: "transform 0.3s ease",
             }}
           />
           <Typography
             fontSize="0.9rem"
             fontWeight="500"
-            color="white"
+            color= {colored ? theme.text1 : theme.text1}
             sx={{
               transition: "text-decoration 0.3s ease, color 0.3s ease",
               "&:hover": {
@@ -139,14 +139,14 @@ export default function Footer({ colored }: footerProps) {
             className="icon"
             sx={{
               fontSize: 22,
-              color: "white",
+              color: theme.text1,
               transition: "transform 0.3s ease",
             }}
           />
           <Typography
             fontSize="0.9rem"
             fontWeight="500"
-            color="white"
+            color= {colored ? theme.text1 : theme.text1}
             sx={{
               transition: "text-decoration 0.3s ease, color 0.3s ease",
               "&:hover": {

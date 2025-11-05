@@ -57,7 +57,7 @@ export const themes: Record<string, Theme> = {
   },
   jungle: {
     name: "jungle",
-    primary: "#a4c42d",
+    primary: "#7F9429",
     secondary: "#f16f33",
     background: "#F2FCF9",
     surface: "#E1F9EE",
@@ -83,11 +83,11 @@ export const themes: Record<string, Theme> = {
   },
   galaxy: {
     name: "galaxy",
-    primary: "#A065BB",
-    secondary: "#C874E7",
+    primary: "#D1AB4F",
+    secondary: "#52235E",
     background: "#FAF4FC",
     surface: "#EFDBF4",
-    text1: "#FFFFFF",
+    text1: "#000000",
     text2: "#4E2078",
     success: "#84F1D0",
     warning: "#FFF4C2",

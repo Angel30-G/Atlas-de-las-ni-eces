@@ -1,4 +1,4 @@
-import { Typography, Stack, Box, TextField, MenuItem, Chip } from "@mui/material";
+import { Typography, Stack, Box, TextField, MenuItem, Chip, Button } from "@mui/material";
 import { useTheme } from "@/theme/ThemeProvider";
 import CardWithImage from "@/components/CardWithImage";
 import Image from "next/image";
@@ -72,7 +72,7 @@ export default function Areas() {
           maxWidth: "1200px",
         }}
       >
-        {/* ... (el resto del código JSX permanece igual) */}
+        {/* Hero Section con imagen */}
         <Box
           sx={{
             position: "relative",
@@ -304,20 +304,43 @@ export default function Areas() {
           </Typography>
         </Stack>
 
-        {/* Cards filtradas - MODIFICADO: Stack horizontal con wrap */}
+        {/* Título ESCUELAS como en la imagen */}
+        <Box width="100%" textAlign="center" mt={8} mb={4}>
+          <Typography 
+            variant="h3" 
+            fontWeight="bold" 
+            color={theme.primary}
+            fontFamily="'Josefin Sans', sans-serif"
+            sx={{
+              fontSize: { xs: '2rem', md: '3rem' },
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+            }}
+          >
+            ESCUELAS
+          </Typography>
+          <Box
+            sx={{
+              width: '100px',
+              height: '4px',
+              backgroundColor: theme.secondary,
+              margin: '10px auto',
+              borderRadius: '2px',
+            }}
+          />
+        </Box>
+
+        {/* Cards filtradas - MODIFICADO: 2 tarjetas por fila */}
         <Stack
           direction="row"
-          spacing={4}
-          justifyContent="center"
-          alignItems="flex-start"
           flexWrap="wrap"
+          justifyContent="center"
+          gap={4}
           mb={6}
           mt={6}
-          borderRadius={6}
           sx={{
             width: "100%",
             maxWidth: "1200px",
-            gap: 3,
           }}
         >
           {filteredSchools.length > 0 ? (
@@ -327,18 +350,13 @@ export default function Areas() {
                 sx={{
                   width: {
                     xs: "100%",        // En móvil: una columna
-                    sm: "48%",         // En tablet: 2 columnas  
-                    md: "45%",         // En desktop: 2 columnas
-                    lg: "45%",         // En pantallas grandes: 3 columnas
+                    sm: "100%",        // En tablet: una columna  
+                    md: "48%",         // En desktop: 2 columnas
+                    lg: "48%",         // En pantallas grandes: 2 columnas
                   },
-                  maxWidth: "500px",
-                  minWidth: "300px", // Ancho mínimo para mantener buena legibilidad
+                  maxWidth: "550px",
+                  minWidth: "300px",
                   fontFamily: "'Josefin Sans', sans-serif",  
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  '&:hover': {
-                    transform: 'translateY(-5px)',
-                    boxShadow: 4,
-                  }
                 }}
               >
                 <CardWithImage
@@ -347,6 +365,7 @@ export default function Areas() {
                   image={school.image}
                   description={school.description}
                   href={school.href}
+                  backgroundImage="/assets/images/card-bg.png" // Agrega tu imagen de fondo aquí
                 />
               </Box>
             ))
@@ -371,7 +390,7 @@ export default function Areas() {
           }}
         />
 
-        {/* Bicho lupa - NUEVA IMAGEN AGREGADA */}
+        {/* Bicho lupa */}
         <Image
           src="/bicho-lupa.png"
           alt="Bicho lupa"
