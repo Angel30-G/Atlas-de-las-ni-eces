@@ -58,8 +58,8 @@ export const themes: Record<string, Theme> = {
 
   candy: {
     name: "candy",
-    primary: "#D87AA7",
-    secondary: "#F27BB4",
+    primary: "#874663",
+    secondary: "#A89D42",
     background: "#FFF9FC",
     surface: "#FFEAF2",
     text1: "#FFFFFF",
@@ -72,7 +72,7 @@ export const themes: Record<string, Theme> = {
 
   galaxy: {
     name: "galaxy",
-    primary: "#A065BB",
+    primary: "#D1AB4F",
     secondary: "#C874E7",
     background: "#FAF4FC",
     surface: "#EFDBF4",

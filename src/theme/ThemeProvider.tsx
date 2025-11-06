@@ -70,8 +70,8 @@ export const themes: Record<string, Theme> = {
   },
   candy: {
     name: "candy",
-    primary: "#D87AA7",
-    secondary: "#F27BB4",
+    primary: "#874663",
+    secondary: "#D1AB4F",
     background: "#FFF9FC",
     surface: "#FFEAF2",
     text1: "#FFFFFF",
