@@ -1,9 +1,10 @@
-import { Stack, Typography, Box, Button } from "@mui/material";
+import { Stack, Typography, Box, Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { useTheme } from "@/theme/ThemeProvider";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import ImageUpload from "@/components/ImageUpload/ImageUpload";
 
 type MapHomeProps = {
   mapLink: string;
@@ -15,6 +16,8 @@ export default function MapSection({ mapLink, text }: MapHomeProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isExploring, setIsExploring] = useState(false);
+  const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -33,6 +36,15 @@ export default function MapSection({ mapLink, text }: MapHomeProps) {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleImageUpload = (imageUrl: string) => {
+    setUploadedImageUrl(imageUrl);
+    console.log('Imagen subida:', imageUrl);
+    
+    setTimeout(() => {
+      setUploadDialogOpen(false);
+    }, 2000);
+  };
 
   return (
     <Stack
@@ -182,6 +194,86 @@ export default function MapSection({ mapLink, text }: MapHomeProps) {
       >
         {text}
       </Typography>
+
+      {/* Botón para subir imágenes */}
+      <Button
+        variant="contained"
+        onClick={() => setUploadDialogOpen(true)}
+        sx={{
+          mt: 2,
+          mb: 3,
+          padding: "10px 24px",
+          borderRadius: "25px",
+          background: `linear-gradient(135deg, ${theme.secondary}, ${theme.primary})`,
+          color: "white",
+          fontWeight: "bold",
+          fontFamily: "'Josefin Sans', sans-serif",
+          textTransform: "none",
+          boxShadow: `0 4px 15px ${theme.primary}40`,
+          '&:hover': {
+            background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
+            transform: 'translateY(-2px)',
+            boxShadow: `0 6px 20px ${theme.primary}60`,
+          },
+          transition: 'all 0.3s ease',
+        }}
+      >
+        📸 Subir Imagen al Mapa
+      </Button>
+
+      {/* Diálogo para subir imágenes */}
+      <Dialog 
+        open={uploadDialogOpen} 
+        onClose={() => setUploadDialogOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle sx={{ 
+          textAlign: 'center',
+          background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          color: 'transparent',
+          fontFamily: "'Josefin Sans', sans-serif",
+        }}>
+          🗺️ Agregar Imagen al Mapa
+        </DialogTitle>
+        <DialogContent>
+          <ImageUpload onImageUpload={handleImageUpload} />
+          
+          {uploadedImageUrl && (
+            <Box sx={{ mt: 2, p: 2, backgroundColor: `${theme.success}20`, borderRadius: 2 }}>
+              <Typography variant="body2" color={theme.success} sx={{ mb: 1 }}>
+                ✅ ¡Imagen subida exitosamente!
+              </Typography>
+              <Typography variant="caption" color={theme.text2}>
+                URL: {uploadedImageUrl}
+              </Typography>
+              <Typography variant="caption" color={theme.text2} sx={{ display: 'block', mt: 1 }}>
+                Ahora puedes usar esta URL en uMap con: 
+                <code style={{ 
+                  display: 'block', 
+                  background: theme.background, 
+                  padding: '8px', 
+                  borderRadius: '4px', 
+                  marginTop: '4px',
+                  fontSize: '12px'
+                }}>
+                  {`<img src="${uploadedImageUrl}" alt="Mi imagen" style="max-width: 300px;">`}
+                </code>
+              </Typography>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={() => setUploadDialogOpen(false)}
+            sx={{ color: theme.text2 }}
+          >
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Box
         position="relative"
