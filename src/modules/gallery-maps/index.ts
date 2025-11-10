@@ -1,2 +1,2 @@
-import gallery from "./Gallery";
+import gallery from "../gallery-maps/Gallery";
 export default gallery;
