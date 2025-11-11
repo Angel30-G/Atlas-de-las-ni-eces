@@ -2,6 +2,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useTheme } from "@/theme/ThemeProvider";
+import ImageCard from "@/modules/start/components/ImageCard/ImageCard";
 
 /* Helper: HEX → RGBA */
 function hexToRgba(hex: string, alpha = 1) {
@@ -61,8 +62,8 @@ export default function AboutUs() {
           sx={{
             position: "absolute",
             top: { xs: "-8%", md: "-10%" },
-            right: { xs: "1%", md: "-9%" }, 
-            width: { xs: "72%", md: "48%" },    
+            right: { xs: "1%", md: "-9%" },
+            width: { xs: "72%", md: "48%" },
             aspectRatio: "3 / 1",
             opacity: 0.9,
             pointerEvents: "none",
@@ -112,12 +113,7 @@ export default function AboutUs() {
               fontWeight: 300,
             }}
           >
-            Es resultado de un proyecto de extensión universitaria del Tecnológico de
-            Costa Rica (TEC) que busca visibilizar cómo las infancias perciben y
-            experimentan el territorio que habitan. Frente a un modelo de planificación
-            históricamente adultocéntrico, este proyecto propone una ruptura simbólica
-            al reconocer a niñas y niños como sujetos activos con capacidad de análisis,
-            opinión y propuesta sobre los espacios que habitan.
+            El Atlas de las Niñeces es un proyecto de extensión universitaria del Instituto Tecnológico de Costa Rica (TEC), desarrollado desde el Laboratorio de Comunidades y Computación (LabComún) de la sede del TEC en Alajuela. Este espacio impulsa la articulación entre extensión e investigación, promoviendo el intercambio y la construcción colectiva de conocimiento entre la universidad pública y su entorno social, económico y cultural. 
           </Typography>
         </Stack>
       </Box>
@@ -130,8 +126,9 @@ export default function AboutUs() {
             mx: "auto",
             display: "grid",
             gridTemplateColumns: { xs: "1fr", md: "1.1fr 0.9fr" },
-            gap: 0,
             alignItems: "stretch",
+            justifyItems: { xs: "center", md: "stretch" }, // centrado en móvil
+            rowGap: { xs: 3, md: 0 },
           }}
         >
           {/* Izquierda: tarjeta con degradado */}
@@ -139,10 +136,13 @@ export default function AboutUs() {
             sx={{
               position: "relative",
               p: { xs: 3, md: 4, lg: 5 },
-              backgroundImage: `linear-gradient(90deg, ${hexToRgba(theme.primary, 0.95)} 0%, ${hexToRgba(
+              backgroundImage: `linear-gradient(90deg, ${hexToRgba(
                 theme.primary,
-                0.55
-              )} 52%, ${hexToRgba(theme.primary, 0.18)} 100%)`,
+                0.95
+              )} 0%, ${hexToRgba(theme.primary, 0.55)} 52%, ${hexToRgba(
+                theme.primary,
+                0.18
+              )} 100%)`,
               color: hexToRgba("#1E2A39", 0.9),
               borderRadius: { xs: "24px 24px 0 0", md: "28px 0 0 28px" },
               boxShadow: "0 10px 24px rgba(0,0,0,0.08)",
@@ -170,9 +170,10 @@ export default function AboutUs() {
                 maxWidth: "52ch",
               }}
             >
-              Somos un equipo interdisciplinario comprometido con la transformación
-              urbana participativa. Trabajamos en conjunto con comunidades locales
-              para mapear, comprender y visibilizar sus entornos.
+              El proyecto busca visibilizar las percepciones, experiencias y deseos de las infancias en torno al territorio y el espacio público, integrando herramientas tecnológicas y metodologías participativas para fomentar la reflexión comunitaria sobre la ciudad y su gestión. 
+
+Desde un enfoque de software libre, datos abiertos y investigación-acción participativa, el Atlas de las Niñeces propone una forma distinta de mirar el territorio, desde las voces y los mapas que las niñas y los niños construyen. 
+
             </Typography>
 
             <Typography
@@ -184,28 +185,27 @@ export default function AboutUs() {
                 maxWidth: "62ch",
               }}
             >
-              Fomentamos especialmente la participación activa de niñas y niños en
-              procesos de planificación, reconociendo sus voces, vivencias y
-              conocimientos como esenciales para construir ciudades más humanas,
-              justas y significativas.
+             Además, constituye una plataforma de aprendizaje para las personas estudiantes de la carrera de Ingeniería en Computación, quienes participan en el diseño y desarrollo de herramientas tecnológicas con sentido social, fortaleciendo su formación integral y su compromiso con la realidad local. 
             </Typography>
           </Box>
 
-          {/* Derecha: imagen */}
+          {/* Derecha: imagen con proporción estable */}
           <Box
             sx={{
               position: "relative",
-              minHeight: { xs: 240, md: 380 },
+              aspectRatio: { xs: "16 / 10", md: "4 / 3" },
               borderRadius: { xs: "0 0 24px 24px", md: "0 28px 28px 0" },
               overflow: "hidden",
               boxShadow: "0 10px 24px rgba(0,0,0,0.08)",
+              width: "100%",
             }}
           >
             <Image
               src="/assets/heroImages/Hero8.jpg"
               alt="Equipo de trabajo en campo"
               fill
-              style={{ objectFit: "cover" }}
+              sizes="(max-width: 900px) 100vw, 600px"
+              style={{ objectFit: "cover", objectPosition: "center" }}
               priority
             />
           </Box>
@@ -215,71 +215,27 @@ export default function AboutUs() {
       {/* ================= ACTIVIDADES / METODOLOGÍA / LOGROS ================= */}
       <Stack
         direction={{ xs: "column", md: "row" }}
-        spacing={6}
+        spacing={{ xs: 8, md: 6 }}
+        alignItems={{ xs: "center", md: "stretch" }}
         justifyContent="center"
-        alignItems="stretch"
-        maxWidth="1200px"
-        mx="auto"
-        px={3}
-        mb={12}
+        sx={{ width: "100%", maxWidth: "1200px", mx: "auto", px: { xs: 2, md: 3 }, mb: { xs: 10, md: 12 } }}
       >
-        <Feature
+        <ImageCard
           title="ACTIVIDADES"
-          image="/assets/heroImages/nosotros1.jpg"
-          text="A través de talleres participativos realizados en escuelas públicas de distintas localidades del país, facilitados por población estudiantil del TEC junto a personas extensionistas y docentes."
-          color={theme.primary}
+          description="A través de talleres participativos realizados en escuelas públicas de distintas localidades del país, facilitados por población estudiantil del TEC junto a personas extensionistas y docentes."
+          image="/Actividades.png"
         />
-        <Feature
+        <ImageCard
           title="METODOLOGÍA"
-          image="/assets/heroImages/nosotros3.jpg"
-          text="La metodología utilizada se basa en el mapeo participativo o cartografía social, una herramienta crítica que permite a las comunidades representar colectivamente su experiencia territorial."
-          color={theme.primary}
+          description="La metodología utilizada se basa en el mapeo participativo o cartografía social, una herramienta crítica que permite a las comunidades representar colectivamente su experiencia territorial."
+          image="/Metodologia.png"
         />
-        <Feature
+        <ImageCard
           title="LOGROS"
-          image="/assets/heroImages/nosotros2.jpg"
-          text="Se recopilan mapas, dibujos y narrativas creadas por niños y niñas entre los 9 y 10 años, que reflejan sus vivencias, preocupaciones, deseos y vínculos con el espacio público."
-          color={theme.primary}
+          description="Se recopilan mapas, dibujos y narrativas creadas por niños y niñas entre los 9 y 10 años, que reflejan sus vivencias, preocupaciones, deseos y vínculos con el espacio público."
+          image="/Logros.png"
         />
       </Stack>
     </Box>
-  );
-}
-
-/* ======= Componente auxiliar ======= */
-function Feature({
-  title,
-  image,
-  text,
-  color,
-}: {
-  title: string;
-  image: string;
-  text: string;
-  color: string;
-}) {
-  return (
-    <Stack flex={1} spacing={2} alignItems="flex-start">
-      <Typography variant="h5" fontWeight={700} sx={{ textTransform: "uppercase", color }}>
-        {title}
-      </Typography>
-
-      <Box
-        sx={{
-          position: "relative",
-          borderRadius: 2,
-          overflow: "hidden",
-          width: "100%",
-          height: 200,
-          boxShadow: 2,
-        }}
-      >
-        <Image src={image} alt={title} fill style={{ objectFit: "cover" }} />
-      </Box>
-
-      <Typography variant="body2" color="text.primary" lineHeight={1.6}>
-        {text}
-      </Typography>
-    </Stack>
   );
 }

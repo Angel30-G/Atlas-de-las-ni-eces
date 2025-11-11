@@ -5,50 +5,77 @@ import {
   Box,
   Stack,
   Typography,
-  IconButton,
   Button,
 } from "@mui/material";
-
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { useTheme } from "@/theme/ThemeProvider";
 
-type Person = { nombre: string };
+type Person = { nombre: string; rol?: string };
 
-function PersonTile({ nombre }: { nombre: string }) {
+function PersonTile({
+  nombre,
+  rol,
+  imgSrc,
+}: {
+  nombre: string;
+  rol?: string;
+  imgSrc: string;
+}) {
   return (
-    <Stack alignItems="center" gap={1.5} sx={{ width: 160 }}>
+    <Stack alignItems="center" gap={0.25} sx={{ width: { xs: 280, md: 320 } }}>
+      {/* Icono */}
       <Box
         sx={{
-          width: 100,
-          height: 100,
-          borderRadius: "50%",
           position: "relative",
+          width: "100%",
+          aspectRatio: "1/1",
           overflow: "hidden",
+          clipPath: {
+            xs: "inset(0 0 8% 0)",  
+            md: "inset(0 0 12% 0)", 
+          },
         }}
       >
         <Image
-          src="/Avatar.png"
+          src={imgSrc}
           alt={nombre}
           fill
-          sizes="100px"
-          style={{ objectFit: "cover" }}
+          sizes="(max-width: 600px) 280px, 320px"
+          style={{ objectFit: "contain", objectPosition: "center bottom" }}
+          priority={false}
         />
       </Box>
+
+      {/* Nombre */}
       <Typography
         variant="body2"
         sx={{
-          fontWeight: 700,
+          fontWeight: 1200,
           textAlign: "center",
           letterSpacing: 0.3,
-          textTransform: "uppercase",
+          textTransform: "none",
+          fontSize: { xs: 23, md: 26 },
+          mt: -8,
         }}
       >
         {nombre}
       </Typography>
+
+      {/* Rol */}
+      {rol && (
+        <Typography
+          variant="body2"
+          sx={{
+            textAlign: "center",
+            letterSpacing: 0.2,
+            color: "#444",
+            fontSize: { xs: 13, md: 15 },
+            mt: 0.5,
+          }}
+        >
+          {rol}
+        </Typography>
+      )}
     </Stack>
   );
 }
@@ -71,7 +98,7 @@ function Section({
           fontWeight: 900,
           letterSpacing: 1,
           mb: 4,
-          fontSize: { xs: 20, md: 24 },
+          fontSize: { xs: 22, md: 28 },
           textTransform: "uppercase",
           color: theme.primary,
         }}
@@ -86,48 +113,52 @@ function Section({
 export default function Credits() {
   const { theme } = useTheme();
 
-  const profesores: Person[] = [
-    { nombre: "PROF. LOREM IPSUM" },
-    { nombre: "PROF. LOREM IPSUM" },
-    { nombre: "PROF. LOREM IPSUM" },
-    { nombre: "PROF. LOREM IPSUM" },
+  // Equipo de trabajo (nombre + rol)
+  const equipo: Person[] = [
+    { nombre: "Claudia Rojas Bravo", rol: "Coordinadora y extensionista" },
+    { nombre: "Jaime Gutiérrez Alfaro", rol: "Extensionista" },
+    { nombre: "Shi Alarcón-Zamora", rol: "Extensionista" },
+    { nombre: "Mauricio Guevara Murillo", rol: "Extensionista" },
   ];
 
   const estudiantes: Person[] = [
     { nombre: "LOREM IPSUM" },
     { nombre: "LOREM IPSUM" },
     { nombre: "LOREM IPSUM" },
+    { nombre: "LOREM IPSUM" },
   ];
+
+  const alternateImage = (i: number) => (i % 2 === 0 ? "/cred1.PNG" : "/cred2.PNG");
 
   return (
     <Stack
       width="100%"
       alignItems="center"
       sx={{
-        bgcolor: "#FFF9F1",
+        bgcolor: "theme.background",
         py: { xs: 4, md: 8 },
         gap: { xs: 6, md: 10 },
       }}
     >
-      {/* PROFESORES */}
-      <Section title="PROFESORES">
+      {/* EQUIPO DE TRABAJO */}
+      <Section title="EQUIPO DE TRABAJO">
         <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
-            gap: 5,
+            gap: 6,
             justifyContent: "center",
             "& > *": {
-              flex: { xs: "0 0 calc(50% - 20px)", sm: "0 0 calc(25% - 20px)" },
-              maxWidth: { xs: "calc(50% - 20px)", sm: "calc(25% - 20px)" },
+              flex: { xs: "0 0 calc(50% - 24px)", sm: "0 0 calc(25% - 24px)" },
+              maxWidth: { xs: "calc(50% - 24px)", sm: "calc(25% - 24px)" },
               display: "flex",
               justifyContent: "center",
             },
           }}
         >
-          {profesores.map((p, i) => (
-            <Box key={i}>
-              <PersonTile nombre={p.nombre} />
+          {equipo.map((p, i) => (
+            <Box key={`equipo-${i}`}>
+              <PersonTile nombre={p.nombre} rol={p.rol} imgSrc={alternateImage(i)} />
             </Box>
           ))}
         </Box>
@@ -139,19 +170,19 @@ export default function Credits() {
           sx={{
             display: "flex",
             flexWrap: "wrap",
-            gap: 5,
+            gap: 6,
             justifyContent: "center",
             "& > *": {
-              flex: { xs: "0 0 calc(50% - 20px)", sm: "0 0 calc(25% - 20px)" },
-              maxWidth: { xs: "calc(50% - 20px)", sm: "calc(25% - 20px)" },
+              flex: { xs: "0 0 calc(50% - 24px)", sm: "0 0 calc(25% - 24px)" },
+              maxWidth: { xs: "calc(50% - 24px)", sm: "calc(25% - 24px)" },
               display: "flex",
               justifyContent: "center",
             },
           }}
         >
           {estudiantes.map((e, i) => (
-            <Box key={i}>
-              <PersonTile nombre={e.nombre} />
+            <Box key={`est-${i}`}>
+              <PersonTile nombre={e.nombre} imgSrc={alternateImage(i)} />
             </Box>
           ))}
         </Box>
@@ -164,18 +195,43 @@ export default function Credits() {
             sx={{
               width: "100%",
               maxWidth: 900,
-              position: "relative", // ancla del monito
+              position: "relative",
               mx: "auto",
             }}
           >
-            {/* Caja de la foto con overflow hidden (esquinas redondeadas) */}
+            {/* ASTER */}
+            <Box
+              sx={{
+                position: "absolute",
+                left: { xs: -180, md: -260 },
+                top: { xs: 60, md: 40 },
+                width: { xs: 420, md: 640 }, 
+                zIndex: 0,
+                pointerEvents: "none",
+                opacity: 2, 
+                backgroundColor: theme.secondary,
+                WebkitMaskImage: "url(/Aster.svg)",
+                maskImage: "url(/Aster.svg)",
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+                WebkitMaskPosition: "center",
+                maskPosition: "center",
+                filter: "drop-shadow(0 12px 25px rgba(0,0,0,.12))",
+                aspectRatio: "1 / 1", 
+              }}
+            />
+
+            {/* Foto principal */}
             <Box
               sx={{
                 borderRadius: 4,
-                overflow: "hidden",               
+                overflow: "hidden",
                 boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
                 position: "relative",
                 aspectRatio: "16/9",
+                zIndex: 1, 
               }}
             >
               <Image
@@ -185,27 +241,13 @@ export default function Credits() {
                 sizes="(max-width: 900px) 100vw, 900px"
                 style={{ objectFit: "cover" }}
               />
-
-              {/* Flechas  */}
-              <IconButton
-                size="small"
-                sx={{ position: "absolute", left: 8, top: "calc(50% - 16px)", bgcolor: "white" }}
-              >
-                <ArrowBackIosNewIcon fontSize="small" />
-              </IconButton>
-              <IconButton
-                size="small"
-                sx={{ position: "absolute", right: 8, top: "calc(50% - 16px)", bgcolor: "white" }}
-              >
-                <ArrowForwardIosIcon fontSize="small" />
-              </IconButton>
             </Box>
 
-            {/* Monito: hermano del cuadro de la foto, absoluto al WRAPPER */}
+            {/* Bichito derecha */}
             <Box
               sx={{
                 position: "absolute",
-                right: { xs: -24, sm: -36, md: -48 }, 
+                right: { xs: -24, sm: -36, md: -48 },
                 bottom: { xs: -6, sm: -8, md: -10 },
                 width: { xs: 84, sm: 110, md: 140 },
                 pointerEvents: "none",
@@ -224,13 +266,6 @@ export default function Credits() {
             </Box>
           </Box>
 
-          {/* Dots */}
-          <Stack direction="row" alignItems="center" gap={2}>
-            <RadioButtonCheckedIcon fontSize="small" />
-            <RadioButtonUncheckedIcon fontSize="small" />
-            <RadioButtonUncheckedIcon fontSize="small" />
-          </Stack>
-
           {/* Botón explorar */}
           <Stack direction="row" gap={4}>
             <Button
@@ -240,7 +275,6 @@ export default function Credits() {
             >
               explorar
             </Button>
-
           </Stack>
         </Stack>
       </Section>

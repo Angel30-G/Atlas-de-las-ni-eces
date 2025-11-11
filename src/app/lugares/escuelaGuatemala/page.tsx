@@ -4,8 +4,6 @@ import alajuelaImages from "./guatemalaImages";
 import PlaceCard from "@/modules/places/components/PlaceCard";
 import VideoSection from "@/modules/places/components/VideoSection";
 import GallerySection from "@/modules/places/components/GallerySection";
-import BrochureSection from "@/modules/places/components/BrochureSection";
-import MapSection from "@/modules/places/components/MapSection";
 import Footer from "@/components/Footer";
 
 export default function Guatemala() {
@@ -48,12 +46,6 @@ export default function Guatemala() {
             "Los niños y niñas nos han ayudado con su conocimiento y estamos emocionados de compartir su increíble trabajo. A través de esta actividad, los estudiantes de la escuela republica de Guatemala han aprendido sobre cartografía y la importancia de los mapas en la planificación urbana. Mira el proceso completo en nuestra galería de imágenes"
           }
         />
-        <MapSection
-          text="Toda la información que los niños y niñas de 4° grado nos compartieron es ahora parte del mapa digital libre de OpenStreetMap, explora el mapa y las zonas de interes"
-          mapLink="https://umap.openstreetmap.fr/es/map/proyecto-alajuela_1300222#16/10.0168/-84.2130"
-        />
-        <BrochureSection brochureLink="https://drive.google.com/file/d/1Vlo1YhVME4eBpbtXQrxP6YHI-pNVrdbm/preview" />
-        <Stack my={3} />
       </Stack>
       <Footer colored />
     </>

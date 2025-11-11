@@ -1,55 +1,35 @@
+"use client";
 import * as React from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  Button,
-  Box,
-  Stack,
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Card, CardContent, Typography, Button, Box } from "@mui/material";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import Link from "next/link";
 import { useTheme } from "@/theme/ThemeProvider";
-import DownloadButton from "@/components/DownloadButton";
-import { documentsAlajuela } from "@/modules/documents";
 
-interface CardWithImageProps {
+export interface CardWithImageProps {
   title: string;
-  subheader?: string;
   image: string;
-  description: string;
   href: string;
-  backgroundImage?: string; // Nueva prop para imagen de fondo
+  backgroundImage?: string;
+  backgroundSize?: React.CSSProperties["backgroundSize"];
+  backgroundPosition?: React.CSSProperties["backgroundPosition"];
+  backgroundRepeat?: React.CSSProperties["backgroundRepeat"];
+  enableSoftOverlay?: boolean;
+  tintBackgroundWithThemeSecondary?: boolean;
 }
 
 export default function CardWithImage({
   title,
-  subheader,
   image,
-  description,
   href,
-  backgroundImage = "/assets/images/default-card-bg.png", // Imagen de fondo por defecto
+  backgroundImage = "/assets/images/default-card-bg.png",
+  backgroundSize = "cover",
+  backgroundPosition = "center",
+  backgroundRepeat = "no-repeat",
+  enableSoftOverlay = false,
+  tintBackgroundWithThemeSecondary = false,
 }: CardWithImageProps) {
   const { theme } = useTheme();
-  const storageKey = `liked-${title}`;
-  const [liked, setLiked] = React.useState<boolean>(false);
-  const [isHovered, setIsHovered] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    const stored = localStorage.getItem(storageKey);
-    if (stored === "true") {
-      setLiked(true);
-    }
-  }, [storageKey]);
-
-  const toggleLike = () => {
-    const newLiked = !liked;
-    setLiked(newLiked);
-    localStorage.setItem(storageKey, newLiked.toString());
-  };
+  const [isHovered, setIsHovered] = React.useState(false);
 
   return (
     <Card
@@ -60,218 +40,167 @@ export default function CardWithImage({
         flexDirection: "column",
         width: "100%",
         maxWidth: 500,
-        minHeight: 400,
-        boxShadow: isHovered ? 6 : 3,
+        minHeight: 360,
         borderRadius: 3,
         overflow: "hidden",
         position: "relative",
-        transition: "all 0.3s ease",
-        transform: isHovered ? "translateY(-8px)" : "translateY(0)",
-        border: `2px solid ${isHovered ? theme.primary : 'transparent'}`,
-        background: backgroundImage 
-          ? `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(${backgroundImage})`
-          : "white",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        '&:hover': {
-          boxShadow: `0 12px 40px ${theme.primary}40`,
-        },
+        transition: "transform .3s ease",
+        transform: isHovered ? "translateY(-6px)" : "translateY(0)",
+        boxShadow: "none",
+        ...(backgroundImage && !tintBackgroundWithThemeSecondary
+          ? {
+              backgroundImage: `linear-gradient(${theme.background}F2, ${theme.background}F2), url(${backgroundImage})`,
+              backgroundRepeat: `no-repeat, ${backgroundRepeat}`,
+              backgroundSize: `auto, ${backgroundSize}`,
+              backgroundPosition: `0 0, ${backgroundPosition}`,
+            }
+          : {
+              backgroundColor: theme.background,
+            }),
       }}
     >
-      {/* Imagen principal */}
+      {tintBackgroundWithThemeSecondary && backgroundImage && (
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+            backgroundColor: theme.secondary,
+            maskImage: `url(${backgroundImage})`,
+            WebkitMaskImage: `url(${backgroundImage})`,
+            maskRepeat: backgroundRepeat || "no-repeat",
+            WebkitMaskRepeat: backgroundRepeat || "no-repeat",
+            maskSize: backgroundSize || "cover",
+            WebkitMaskSize: backgroundSize || "cover",
+            maskPosition: backgroundPosition || "center",
+            WebkitMaskPosition: backgroundPosition || "center",
+            opacity: 1,
+          }}
+        />
+      )}
+
+      {enableSoftOverlay && (
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            background: `radial-gradient(80% 80% at 50% 40%, ${theme.background}00 0%, ${theme.background}66 70%, ${theme.background}99 100%)`,
+            zIndex: 0,
+          }}
+        />
+      )}
+
       <Box
         sx={{
           position: "relative",
           width: "100%",
-          height: 200,
-          flexShrink: 0,
+          height: 220,
           overflow: "hidden",
+          backgroundColor: theme.background,
+          zIndex: 1,
         }}
       >
-        <CardMedia
-          component="img"
-          image={image}
-          alt={title}
+        <Box
           sx={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            transition: "transform 0.3s ease",
-            transform: isHovered ? "scale(1.1)" : "scale(1)",
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${image})`,
+            backgroundSize: isHovered ? "105% 105%" : "100% 100%",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            transition: "background-size .45s ease",
+            willChange: "background-size",
           }}
         />
 
-        {/* Badge de like */}
         <Box
           sx={{
+            pointerEvents: "none",
             position: "absolute",
-            top: 10,
-            right: 10,
-            zIndex: 10,
-            backgroundColor: "white",
-            borderRadius: "50%",
-            width: 40,
-            height: 40,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: 2,
-            cursor: "pointer",
-            transition: "all 0.3s ease",
-            '&:hover': {
-              transform: "scale(1.1)",
-            },
-          }}
-        >
-          <Button onClick={toggleLike} sx={{ minWidth: 'auto', p: 1 }}>
-            {liked ? (
-              <FavoriteIcon sx={{ color: theme.primary, fontSize: 20 }} />
-            ) : (
-              <FavoriteBorderIcon sx={{ color: theme.primary, fontSize: 20 }} />
-            )}
-          </Button>
-        </Box>
-
-        {/* Overlay de gradiente para mejor legibilidad del texto */}
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: 0,
+            top: -2,
             left: 0,
             right: 0,
-            height: "60%",
-            background: "linear-gradient(transparent, rgba(0,0,0,0.3))",
+            height: "38%",
+            background: `linear-gradient(to bottom, ${theme.background}F2, ${theme.background}00)`,
+          }}
+        />
+        <Box
+          sx={{
+            pointerEvents: "none",
+            position: "absolute",
+            bottom: -2,
+            left: 0,
+            right: 0,
+            height: "38%",
+            background: `linear-gradient(to top, ${theme.background}F2, ${theme.background}00)`,
+          }}
+        />
+        <Box
+          sx={{
+            pointerEvents: "none",
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 2,
+            backgroundColor: theme.background,
           }}
         />
       </Box>
 
-      {/* Contenido */}
-      <CardContent sx={{ 
-        padding: 3, 
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        position: "relative",
-        zIndex: 2,
-      }}>
-        <Box>
-          {/* Encabezado con estilo similar a la imagen */}
-          <Box sx={{ mb: 2 }}>
-            <Typography 
-              variant="h6" 
-              fontWeight="bold"
-              sx={{
-                color: theme.primary,
-                fontFamily: "'Josefin Sans', sans-serif",
-                fontSize: '1.1rem',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                mb: 0.5,
-              }}
-            >
-              {title.split(' - ')[0]} {/* ZONA ALAJUELA */}
-            </Typography>
-            
-            <Typography
-              variant="caption"
-              sx={{
-                color: theme.text2,
-                fontFamily: "'Josefin Sans', sans-serif",
-                fontWeight: 300,
-                display: 'block',
-                mb: 1,
-              }}
-            >
-              {subheader || "Actualizado recientemente"}
-            </Typography>
+      <CardContent
+        sx={{
+          p: 3,
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 2,
+          backgroundColor: theme.background,
+          zIndex: 1,
+        }}
+      >
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{
+            color: theme.primary,
+            fontFamily: "'Josefin Sans', sans-serif",
+            fontWeight: 600,
+          }}
+        >
+          {title}
+        </Typography>
 
-            {/* Nombre de la escuela */}
-            <Typography
-              variant="body1"
-              fontWeight="600"
-              sx={{
-                color: theme.primary,
-                fontFamily: "'Josefin Sans', sans-serif",
-                fontSize: '0.95rem',
-              }}
-            >
-              {title.includes(' - ') ? title.split(' - ')[1] : title}
-            </Typography>
-          </Box>
-
-          {/* Descripción */}
-          <Typography 
-            variant="body2" 
-            sx={{ 
-              lineHeight: 1.5,
-              color: theme.text2,
+        <Link href={href} style={{ textDecoration: "none", width: "100%" }}>
+          <Button
+            variant="contained"
+            fullWidth
+            endIcon={<ArrowForwardRoundedIcon />}
+            sx={{
+              borderRadius: 999,
+              textTransform: "none",
+              fontWeight: 600,
+              px: 2.5,
+              py: 1.1,
+              backgroundColor: theme.primary,
+              color: theme.text1,
               fontFamily: "'Josefin Sans', sans-serif",
-              fontSize: '0.9rem',
+              transition: "all .3s ease",
+              "& .MuiSvgIcon-root": { transition: "transform .2s ease" },
+              "&:hover .MuiSvgIcon-root": { transform: "translateX(2px)" },
+              "&:hover": {
+                backgroundColor: theme.secondary,
+                boxShadow: `0 4px 12px ${theme.primary}40`,
+              },
             }}
           >
-            {description.length > 100 ? `${description.substring(0, 100)}...` : description}
-          </Typography>
-        </Box>
-
-        {/* Botones - estilo compacto */}
-        <Stack 
-          direction="row" 
-          spacing={1}
-          sx={{ marginTop: 2 }}
-        >
-          <Link href={href} passHref style={{ flex: 1, textDecoration: "none" }}>
-            <Button
-              variant="contained"
-              fullWidth
-              endIcon={<SearchIcon />}
-              sx={{
-                backgroundColor: theme.primary,
-                fontWeight: 600,
-                fontSize: "0.85rem",
-                color: theme.text1,
-                borderRadius: 2,
-                textTransform: "none",
-                py: 1,
-                minHeight: "40px",
-                fontFamily: "'Josefin Sans', sans-serif",
-                letterSpacing: '0.5px',
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  backgroundColor: theme.secondary,
-                  transform: "translateY(-2px)",
-                  boxShadow: `0 4px 12px ${theme.primary}40`,
-                },
-              }}
-            >
-              Explorar
-            </Button>
-          </Link>
-
-          {/* Botón de descarga compacto */}
-          <Box>
-            <DownloadButton elements={documentsAlajuela} type="icon" />
-          </Box>
-        </Stack>
+            explorar
+          </Button>
+        </Link>
       </CardContent>
-
-      {/* Efecto de borde en hover */}
-      {isHovered && (
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            border: `3px solid ${theme.secondary}`,
-            borderRadius: 3,
-            pointerEvents: "none",
-            opacity: 0.3,
-          }}
-        />
-      )}
     </Card>
   );
 }

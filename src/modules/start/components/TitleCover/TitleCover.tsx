@@ -12,8 +12,7 @@ export default function TitleCover({ coverSrc }: Props) {
 
   return (
     <Box
-      sx={{
-        bgcolor: "#FFFFFF",       
+      sx={{      
         position: "relative",
         overflow: "visible",       
       }}

@@ -153,7 +153,7 @@ export default function GallerySection({ images, text }: VideoSectionProps) {
           fontFamily: "'Josefin Sans', sans-serif",
           boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
           "&::before": {
-            content: '"🎨"',
+            content: "none",
             position: "absolute",
             left: -15,
             top: -15,
@@ -165,7 +165,7 @@ export default function GallerySection({ images, text }: VideoSectionProps) {
             },
           },
           "&::after": {
-            content: '"🖼️"',
+            content: "none",
             position: "absolute",
             right: -15,
             bottom: -15,
@@ -197,13 +197,11 @@ export default function GallerySection({ images, text }: VideoSectionProps) {
         }}
       >
         <Box sx={{ animation: "bounce 1s infinite" }}>
-          🎯
         </Box>
         <Typography variant="body1" fontWeight="bold" fontFamily={"'Josefin Sans', sans-serif"}>
           Imagen {currentIndex + 1} de {images.length}
         </Typography>
         <Box sx={{ animation: "bounce 1s infinite 0.3s" }}>
-          🎯
         </Box>
       </Box>
 
@@ -310,7 +308,7 @@ export default function GallerySection({ images, text }: VideoSectionProps) {
 
       {/* Icono de cámara animado */}
       <Image
-        src="/assets/vectors/picture.svg"
+        src="/Vector-9.svg" 
         alt="foto"
         width={isSmall ? 70 : 100}
         height={isSmall ? 70 : 100}
@@ -337,7 +335,7 @@ export default function GallerySection({ images, text }: VideoSectionProps) {
           },
         }}
       >
-        <Typography variant="h3">📷</Typography>
+        <Typography variant="h3"></Typography>
       </Box>
 
       {/* Instrucciones interactivas */}
